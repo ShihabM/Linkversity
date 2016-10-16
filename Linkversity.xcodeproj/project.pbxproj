@@ -14,6 +14,18 @@
 		532FEE591DB397DC0016226A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532FEE571DB397DC0016226A /* LaunchScreen.storyboard */; };
 		532FEE641DB397DC0016226A /* LinkversityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FEE631DB397DC0016226A /* LinkversityTests.swift */; };
 		532FEE6F1DB397DC0016226A /* LinkversityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FEE6E1DB397DC0016226A /* LinkversityUITests.swift */; };
+		532FEE7D1DB39B890016226A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FEE7C1DB39B890016226A /* Colors.swift */; };
+		53A1F7A21DB3C6A5000EC481 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1F7A11DB3C6A5000EC481 /* FeedViewController.swift */; };
+		53A1F7A41DB3C6B3000EC481 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1F7A31DB3C6B3000EC481 /* MessageViewController.swift */; };
+		53A1F7A61DB3C6C1000EC481 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1F7A51DB3C6C1000EC481 /* ProfileViewController.swift */; };
+		53A1F7A81DB3CCA2000EC481 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53A1F7A71DB3CCA2000EC481 /* GoogleService-Info.plist */; };
+		53A1F7A91DB3CCA2000EC481 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53A1F7A71DB3CCA2000EC481 /* GoogleService-Info.plist */; };
+		53A1F7AA1DB3CCA2000EC481 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53A1F7A71DB3CCA2000EC481 /* GoogleService-Info.plist */; };
+		53E654B81DB3D8360055C24B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E654B71DB3D8360055C24B /* RegisterViewController.swift */; };
+		53E654BA1DB3DC6F0055C24B /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E654B91DB3DC6F0055C24B /* Spring.swift */; };
+		9D7DBB361EAECE2C4CD70ECC /* Pods_Linkversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6A6D0E85ED387B6176A222 /* Pods_Linkversity.framework */; };
+		C882DE6E6AD8BFC7961244E6 /* Pods_LinkversityTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DECB85DF219F264050A108 /* Pods_LinkversityTests.framework */; };
+		CB2C37BD0A2AAF3E297E9D72 /* Pods_LinkversityUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F00B87EA54DA864AAF72A55 /* Pods_LinkversityUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		170D84E638F4A94F8F07A465 /* Pods-Linkversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Linkversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Linkversity/Pods-Linkversity.debug.xcconfig"; sourceTree = "<group>"; };
+		2F00B87EA54DA864AAF72A55 /* Pods_LinkversityUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LinkversityUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532FEE4B1DB397DC0016226A /* Linkversity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Linkversity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532FEE4E1DB397DC0016226A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		532FEE501DB397DC0016226A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +61,21 @@
 		532FEE6A1DB397DC0016226A /* LinkversityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkversityUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		532FEE6E1DB397DC0016226A /* LinkversityUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkversityUITests.swift; sourceTree = "<group>"; };
 		532FEE701DB397DC0016226A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		532FEE7C1DB39B890016226A /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		53A1F7A11DB3C6A5000EC481 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		53A1F7A31DB3C6B3000EC481 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		53A1F7A51DB3C6C1000EC481 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		53A1F7A71DB3CCA2000EC481 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		53E654B61DB3D5B40055C24B /* Linkversity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Linkversity.entitlements; sourceTree = "<group>"; };
+		53E654B71DB3D8360055C24B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		53E654B91DB3DC6F0055C24B /* Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spring.swift; sourceTree = "<group>"; };
+		57DECB85DF219F264050A108 /* Pods_LinkversityTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LinkversityTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		645932C6CC2B35D55220380D /* Pods-Linkversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Linkversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-Linkversity/Pods-Linkversity.release.xcconfig"; sourceTree = "<group>"; };
+		8E06838F6FCC802D37393ECB /* Pods-LinkversityTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinkversityTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LinkversityTests/Pods-LinkversityTests.release.xcconfig"; sourceTree = "<group>"; };
+		AC6285088D607E1AC40AD36C /* Pods-LinkversityUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinkversityUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LinkversityUITests/Pods-LinkversityUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B9AEE875B0BD94C9492E283A /* Pods-LinkversityUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinkversityUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LinkversityUITests/Pods-LinkversityUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CE82D57FE30843B0338CF614 /* Pods-LinkversityTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinkversityTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LinkversityTests/Pods-LinkversityTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FB6A6D0E85ED387B6176A222 /* Pods_Linkversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Linkversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D7DBB361EAECE2C4CD70ECC /* Pods_Linkversity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C882DE6E6AD8BFC7961244E6 /* Pods_LinkversityTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB2C37BD0A2AAF3E297E9D72 /* Pods_LinkversityUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +113,8 @@
 				532FEE621DB397DC0016226A /* LinkversityTests */,
 				532FEE6D1DB397DC0016226A /* LinkversityUITests */,
 				532FEE4C1DB397DC0016226A /* Products */,
+				8C2FE22A1A60970921C18D93 /* Pods */,
+				A4D8236D752A619E5FBF39EE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,12 +131,20 @@
 		532FEE4D1DB397DC0016226A /* Linkversity */ = {
 			isa = PBXGroup;
 			children = (
+				53E654B61DB3D5B40055C24B /* Linkversity.entitlements */,
 				532FEE4E1DB397DC0016226A /* AppDelegate.swift */,
 				532FEE501DB397DC0016226A /* ViewController.swift */,
+				53A1F7A11DB3C6A5000EC481 /* FeedViewController.swift */,
+				53A1F7A31DB3C6B3000EC481 /* MessageViewController.swift */,
+				53A1F7A51DB3C6C1000EC481 /* ProfileViewController.swift */,
+				53E654B71DB3D8360055C24B /* RegisterViewController.swift */,
+				532FEE7C1DB39B890016226A /* Colors.swift */,
+				53E654B91DB3DC6F0055C24B /* Spring.swift */,
 				532FEE521DB397DC0016226A /* Main.storyboard */,
 				532FEE551DB397DC0016226A /* Assets.xcassets */,
 				532FEE571DB397DC0016226A /* LaunchScreen.storyboard */,
 				532FEE5A1DB397DC0016226A /* Info.plist */,
+				53A1F7A71DB3CCA2000EC481 /* GoogleService-Info.plist */,
 			);
 			path = Linkversity;
 			sourceTree = "<group>";
@@ -125,6 +167,29 @@
 			path = LinkversityUITests;
 			sourceTree = "<group>";
 		};
+		8C2FE22A1A60970921C18D93 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				170D84E638F4A94F8F07A465 /* Pods-Linkversity.debug.xcconfig */,
+				645932C6CC2B35D55220380D /* Pods-Linkversity.release.xcconfig */,
+				CE82D57FE30843B0338CF614 /* Pods-LinkversityTests.debug.xcconfig */,
+				8E06838F6FCC802D37393ECB /* Pods-LinkversityTests.release.xcconfig */,
+				B9AEE875B0BD94C9492E283A /* Pods-LinkversityUITests.debug.xcconfig */,
+				AC6285088D607E1AC40AD36C /* Pods-LinkversityUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A4D8236D752A619E5FBF39EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB6A6D0E85ED387B6176A222 /* Pods_Linkversity.framework */,
+				57DECB85DF219F264050A108 /* Pods_LinkversityTests.framework */,
+				2F00B87EA54DA864AAF72A55 /* Pods_LinkversityUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +197,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532FEE731DB397DC0016226A /* Build configuration list for PBXNativeTarget "Linkversity" */;
 			buildPhases = (
+				72F617F2949500BA0C6709C6 /* [CP] Check Pods Manifest.lock */,
 				532FEE471DB397DC0016226A /* Sources */,
 				532FEE481DB397DC0016226A /* Frameworks */,
 				532FEE491DB397DC0016226A /* Resources */,
+				9ACC9CD221034DFECB388857 /* [CP] Embed Pods Frameworks */,
+				969C7479D4B57390B0F7B05F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532FEE761DB397DC0016226A /* Build configuration list for PBXNativeTarget "LinkversityTests" */;
 			buildPhases = (
+				35210D90661BDBB988B809B9 /* [CP] Check Pods Manifest.lock */,
 				532FEE5B1DB397DC0016226A /* Sources */,
 				532FEE5C1DB397DC0016226A /* Frameworks */,
 				532FEE5D1DB397DC0016226A /* Resources */,
+				75DAEC20F92B967A1F562C28 /* [CP] Embed Pods Frameworks */,
+				AAABE49CA19F35B4D449378A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +238,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532FEE791DB397DC0016226A /* Build configuration list for PBXNativeTarget "LinkversityUITests" */;
 			buildPhases = (
+				3BCE486356E6701BABCFCC22 /* [CP] Check Pods Manifest.lock */,
 				532FEE661DB397DC0016226A /* Sources */,
 				532FEE671DB397DC0016226A /* Frameworks */,
 				532FEE681DB397DC0016226A /* Resources */,
+				A5A65F4A982568611475948E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,6 +268,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = XEVU76UA2Y;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					532FEE5E1DB397DC0016226A = {
 						CreatedOnToolsVersion = 8.0;
@@ -236,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				532FEE591DB397DC0016226A /* LaunchScreen.storyboard in Resources */,
+				53A1F7A81DB3CCA2000EC481 /* GoogleService-Info.plist in Resources */,
 				532FEE561DB397DC0016226A /* Assets.xcassets in Resources */,
 				532FEE541DB397DC0016226A /* Main.storyboard in Resources */,
 			);
@@ -245,6 +324,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53A1F7A91DB3CCA2000EC481 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,10 +332,134 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53A1F7AA1DB3CCA2000EC481 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		35210D90661BDBB988B809B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3BCE486356E6701BABCFCC22 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		72F617F2949500BA0C6709C6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		75DAEC20F92B967A1F562C28 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LinkversityTests/Pods-LinkversityTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		969C7479D4B57390B0F7B05F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Linkversity/Pods-Linkversity-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9ACC9CD221034DFECB388857 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Linkversity/Pods-Linkversity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5A65F4A982568611475948E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LinkversityUITests/Pods-LinkversityUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAABE49CA19F35B4D449378A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LinkversityTests/Pods-LinkversityTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		532FEE471DB397DC0016226A /* Sources */ = {
@@ -263,7 +467,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				532FEE511DB397DC0016226A /* ViewController.swift in Sources */,
+				53A1F7A41DB3C6B3000EC481 /* MessageViewController.swift in Sources */,
+				53E654BA1DB3DC6F0055C24B /* Spring.swift in Sources */,
+				53E654B81DB3D8360055C24B /* RegisterViewController.swift in Sources */,
+				532FEE7D1DB39B890016226A /* Colors.swift in Sources */,
 				532FEE4F1DB397DC0016226A /* AppDelegate.swift in Sources */,
+				53A1F7A61DB3C6C1000EC481 /* ProfileViewController.swift in Sources */,
+				53A1F7A21DB3C6A5000EC481 /* FeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,8 +621,10 @@
 		};
 		532FEE741DB397DC0016226A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 170D84E638F4A94F8F07A465 /* Pods-Linkversity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Linkversity/Linkversity.entitlements;
 				DEVELOPMENT_TEAM = XEVU76UA2Y;
 				INFOPLIST_FILE = Linkversity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -424,8 +636,10 @@
 		};
 		532FEE751DB397DC0016226A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 645932C6CC2B35D55220380D /* Pods-Linkversity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Linkversity/Linkversity.entitlements;
 				DEVELOPMENT_TEAM = XEVU76UA2Y;
 				INFOPLIST_FILE = Linkversity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -437,6 +651,7 @@
 		};
 		532FEE771DB397DC0016226A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE82D57FE30843B0338CF614 /* Pods-LinkversityTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -452,6 +667,7 @@
 		};
 		532FEE781DB397DC0016226A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E06838F6FCC802D37393ECB /* Pods-LinkversityTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -467,6 +683,7 @@
 		};
 		532FEE7A1DB397DC0016226A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9AEE875B0BD94C9492E283A /* Pods-LinkversityUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = XEVU76UA2Y;
@@ -481,6 +698,7 @@
 		};
 		532FEE7B1DB397DC0016226A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC6285088D607E1AC40AD36C /* Pods-LinkversityUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = XEVU76UA2Y;
@@ -512,6 +730,7 @@
 				532FEE751DB397DC0016226A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		532FEE761DB397DC0016226A /* Build configuration list for PBXNativeTarget "LinkversityTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +739,7 @@
 				532FEE781DB397DC0016226A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		532FEE791DB397DC0016226A /* Build configuration list for PBXNativeTarget "LinkversityUITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +748,7 @@
 				532FEE7B1DB397DC0016226A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
