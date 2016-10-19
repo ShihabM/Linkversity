@@ -12,7 +12,8 @@ import Firebase
 
 class RegisterViewController: UIViewController, UITextFieldDelegate {
     
-    var dismiss: UIButton?
+    var logIn: UIButton?
+    var register: UIButton?
     let defaults = UserDefaults.standard
     var emailField = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
     var passwordField = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
@@ -22,6 +23,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         self.view.backgroundColor = Colors.blueDark
         
+        /*
+         FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
+         if user != nil {
+         self.dismiss(animated: true, completion: nil)
+         }
+         }
+         */
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +53,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         emailField.font = UIFont.systemFont(ofSize: 18)
         emailField.autocorrectionType = UITextAutocorrectionType.no
         emailField.keyboardType = UIKeyboardType.default
-        emailField.returnKeyType = UIReturnKeyType.default
+        emailField.returnKeyType = UIReturnKeyType.next
         emailField.tintColor = Colors.blueAlternative
         emailField.textColor = Colors.white
         emailField.backgroundColor = Colors.blueDark
@@ -65,7 +73,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         passwordField.font = UIFont.systemFont(ofSize: 18)
         passwordField.autocorrectionType = UITextAutocorrectionType.no
         passwordField.keyboardType = UIKeyboardType.default
-        passwordField.returnKeyType = UIReturnKeyType.default
+        passwordField.returnKeyType = UIReturnKeyType.done
         passwordField.tintColor = Colors.blueAlternative
         passwordField.textColor = Colors.white
         passwordField.backgroundColor = Colors.blueDark
@@ -81,51 +89,112 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         })
         
         
-        // Sign up and log in button
-        self.dismiss = UIButton(type: UIButtonType.custom)
-        self.dismiss!.frame = CGRect(x: 0, y: self.view.bounds.height - 60, width: self.view.bounds.width, height: 60)
-        self.dismiss!.alpha = 0
-        self.dismiss!.backgroundColor = Colors.blueAlternative
-        self.dismiss!.setTitle("Sign Up / Log In", for: .normal)
-        self.dismiss!.addTarget(self, action: #selector(dismiss(button:)), for: .touchUpInside)
-        self.dismiss!.setTitleColor(Colors.white, for: .normal)
-        self.view.addSubview(dismiss!)
+        // Register button
+        self.register = UIButton(type: UIButtonType.custom)
+        self.register!.frame = CGRect(x: 0, y: self.view.bounds.height - 70, width: self.view.bounds.width/2, height: 50)
+        self.register!.alpha = 0
+        self.register!.backgroundColor = UIColor.clear
+        self.register!.setTitle("Sign Up", for: .normal)
+        self.register!.addTarget(self, action: #selector(register(button:)), for: .touchUpInside)
+        self.register!.setTitleColor(Colors.white, for: .normal)
+        self.view.addSubview(register!)
         
         // Translate animation using MengTo's Spring library
-        self.dismiss!.transform = CGAffineTransform(translationX: 0, y: 100)
+        self.register!.transform = CGAffineTransform(translationX: 0, y: 100)
         springWithDelay(duration: 0.8, delay: 0, animations: {
-            self.dismiss!.alpha = 1
-            self.dismiss!.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.register!.alpha = 1
+            self.register!.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        // Log in button
+        self.logIn = UIButton(type: UIButtonType.custom)
+        self.logIn!.frame = CGRect(x: self.view.bounds.width/2 + 40, y: self.view.bounds.height - 70, width: self.view.bounds.width/2 - 80, height: 50)
+        self.logIn!.alpha = 0
+        self.logIn!.layer.cornerRadius = 25
+        self.logIn!.backgroundColor = Colors.blueAlternative
+        self.logIn!.setTitle("Log In", for: .normal)
+        self.logIn!.addTarget(self, action: #selector(logIn(button:)), for: .touchUpInside)
+        self.logIn!.setTitleColor(Colors.white, for: .normal)
+        self.view.addSubview(logIn!)
+        
+        // Translate animation using MengTo's Spring library
+        self.logIn!.transform = CGAffineTransform(translationX: 0, y: 100)
+        springWithDelay(duration: 0.9, delay: 0.05, animations: {
+            self.logIn!.alpha = 1
+            self.logIn!.transform = CGAffineTransform(translationX: 0, y: 0)
         })
         
     }
     
     
-    func dismiss(button: UIButton) {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if self.emailField.isFirstResponder {
+            self.passwordField.becomeFirstResponder()
+        } else {
+            self.view.endEditing(true)
+            return false
+        }
+        
+        return true
+    }
+    
+    
+    func register(button: UIButton) {
         
         // Get text from fields
         let email = self.emailField.text
         let password = self.passwordField.text
         
-        // Register and authenticate users with Firebase
+        // Register users with Firebase
         FIRAuth.auth()!.createUser(withEmail: email!,
                                    password: password!) { user, error in
                                     
-                                    // If already a member, simply sign in
+                                    // Sign in after registration
                                     if error == nil {
                                         
-                                        FIRAuth.auth()!.signIn(withEmail: email!,
-                                                               password: password!)
+                                        FIRAuth.auth()!.signIn(withEmail: email!, password: password!)
+                                        self.defaults.set(user?.email, forKey: "user")
                                         
+                                        // Dismiss view
+                                        let register = self.defaults.object(forKey: "hasRegistered") as? Int
+                                        if register != nil {
+                                            self.defaults.set(3, forKey: "hasRegistered")
+                                        }
+                                        self.dismiss(animated: true, completion: nil)
+                                        
+
                                     }
+                                    
+                                    
         }
         
-        // Dismiss view
-        let register = self.defaults.object(forKey: "hasRegistered") as? Int
-        if register != nil {
-            self.defaults.set(3, forKey: "hasRegistered")
+        
+    }
+    
+    func logIn(button: UIButton) {
+        
+        // Get text from fields
+        let email = self.emailField.text
+        let password = self.passwordField.text
+        
+        // Authenticate users with Firebase
+        FIRAuth.auth()!.signIn(withEmail: email!, password: password!) { user, error in
+            if error == nil {
+                self.defaults.set(user?.email, forKey: "user")
+                
+                // Dismiss view
+                let register = self.defaults.object(forKey: "hasRegistered") as? Int
+                if register != nil {
+                    self.defaults.set(3, forKey: "hasRegistered")
+                }
+                self.dismiss(animated: true, completion: nil)
+                
+            }
         }
-        self.dismiss(animated: true, completion: nil)
+        
+        
+        
+        
         
         
     }

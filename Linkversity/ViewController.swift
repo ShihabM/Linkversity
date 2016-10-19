@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UITabBarController {
     
@@ -43,7 +44,7 @@ class ViewController: UITabBarController {
         let rightNavButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
         rightNavButton.addTarget(self, action: #selector(add(button:)), for: .touchUpInside)
         rightNavButton.sizeToFit()
-        rightNavImage = rightNavImage?.imageWithColor(color1: Colors.blueAlternative).withRenderingMode(.alwaysOriginal)
+        rightNavImage = rightNavImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
         rightNavButton.setBackgroundImage(rightNavImage, for: .normal)
         rightNavButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         rightNavButton.alpha = 1
@@ -86,16 +87,26 @@ class ViewController: UITabBarController {
         var controller = RegisterViewController()
         self.present(controller, animated: true, completion: nil)
         
+        
+        
+        
     }
     
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
+
+    }
     
     func more(button: UIButton) {
         
     }
     
     func add(button: UIButton) {
+        
+        var controller = PostViewController()
+        self.present(controller, animated: true, completion: nil)
         
     }
     

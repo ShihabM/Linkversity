@@ -24,7 +24,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.backgroundColor = UIColor.clear
+        tableView.backgroundColor = Colors.cellNorm
         tableView.separatorStyle = .none
         self.view.addSubview(tableView)
         self.tableView.reloadData()
@@ -43,11 +43,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.textLabel?.text = self.content[indexPath.row]
         
-        // Every otehr row has a different background shade
+        // Every other row has a different background shade
         if indexPath.row % 2 == 0 {
-            cell.backgroundColor = Colors.cellNorm
-        } else {
             cell.backgroundColor = Colors.white
+        } else {
+            cell.backgroundColor = Colors.cellNorm
         }
         cell.textLabel?.textColor = Colors.grayDark
         

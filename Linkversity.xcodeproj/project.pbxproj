@@ -23,6 +23,7 @@
 		53A1F7AA1DB3CCA2000EC481 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53A1F7A71DB3CCA2000EC481 /* GoogleService-Info.plist */; };
 		53E654B81DB3D8360055C24B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E654B71DB3D8360055C24B /* RegisterViewController.swift */; };
 		53E654BA1DB3DC6F0055C24B /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E654B91DB3DC6F0055C24B /* Spring.swift */; };
+		53E654BC1DB5496C0055C24B /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E654BB1DB5496C0055C24B /* PostViewController.swift */; };
 		9D7DBB361EAECE2C4CD70ECC /* Pods_Linkversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6A6D0E85ED387B6176A222 /* Pods_Linkversity.framework */; };
 		C882DE6E6AD8BFC7961244E6 /* Pods_LinkversityTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DECB85DF219F264050A108 /* Pods_LinkversityTests.framework */; };
 		CB2C37BD0A2AAF3E297E9D72 /* Pods_LinkversityUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F00B87EA54DA864AAF72A55 /* Pods_LinkversityUITests.framework */; };
@@ -69,6 +70,7 @@
 		53E654B61DB3D5B40055C24B /* Linkversity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Linkversity.entitlements; sourceTree = "<group>"; };
 		53E654B71DB3D8360055C24B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		53E654B91DB3DC6F0055C24B /* Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spring.swift; sourceTree = "<group>"; };
+		53E654BB1DB5496C0055C24B /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		57DECB85DF219F264050A108 /* Pods_LinkversityTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LinkversityTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		645932C6CC2B35D55220380D /* Pods-Linkversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Linkversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-Linkversity/Pods-Linkversity.release.xcconfig"; sourceTree = "<group>"; };
 		8E06838F6FCC802D37393ECB /* Pods-LinkversityTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinkversityTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LinkversityTests/Pods-LinkversityTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				53A1F7A31DB3C6B3000EC481 /* MessageViewController.swift */,
 				53A1F7A51DB3C6C1000EC481 /* ProfileViewController.swift */,
 				53E654B71DB3D8360055C24B /* RegisterViewController.swift */,
+				53E654BB1DB5496C0055C24B /* PostViewController.swift */,
 				532FEE7C1DB39B890016226A /* Colors.swift */,
 				53E654B91DB3DC6F0055C24B /* Spring.swift */,
 				532FEE521DB397DC0016226A /* Main.storyboard */,
@@ -466,6 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53E654BC1DB5496C0055C24B /* PostViewController.swift in Sources */,
 				532FEE511DB397DC0016226A /* ViewController.swift in Sources */,
 				53A1F7A41DB3C6B3000EC481 /* MessageViewController.swift in Sources */,
 				53E654BA1DB3DC6F0055C24B /* Spring.swift in Sources */,
