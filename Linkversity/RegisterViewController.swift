@@ -51,6 +51,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         emailField.autocorrectionType = UITextAutocorrectionType.no
         emailField.keyboardType = UIKeyboardType.default
         emailField.returnKeyType = UIReturnKeyType.next
+        emailField.autocapitalizationType = .none
         emailField.tintColor = Colors.blueAlternative
         emailField.textColor = Colors.white
         emailField.backgroundColor = Colors.blueDark
@@ -125,8 +126,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if self.emailField.isFirstResponder || self.nameField.isFirstResponder || self.uniField.isFirstResponder {
+        if self.emailField.isFirstResponder {
             self.passwordField.becomeFirstResponder()
+        } else if self.nameField.isFirstResponder {
+            self.uniField.becomeFirstResponder()
+        } else if self.uniField.isFirstResponder {
+            self.courseField.becomeFirstResponder()
         } else {
             self.view.endEditing(true)
             return false

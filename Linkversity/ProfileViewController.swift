@@ -206,7 +206,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             var cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
             
-            cell.textLabel?.text = "Your Posts:"
+            cell.textLabel?.text = "My Posts:"
             
             cell.backgroundColor = Colors.cellNorm
             

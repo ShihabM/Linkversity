@@ -126,12 +126,14 @@ class PostViewController: UIViewController, UITextViewDelegate {
         } else {
             
             
-            let user = defaults.object(forKey: "user") as! String
+            let user = self.defaults.object(forKey: "user") as! String
+            let userData = self.defaults.dictionary(forKey: user) as! [String : String]
+            var uniData = userData["uni"]
             
             // Write to Firebase
             
             let textToPost = self.postField.text
-            let content: NSDictionary = ["text":self.postField.text, "user": user]
+            let content: NSDictionary = ["text":self.postField.text, "user": user, "uni": String(describing: uniData!)]
             
             var sanitisedString = textToPost?.replacingOccurrences(of: ".", with: "|")
             sanitisedString = sanitisedString?.replacingOccurrences(of: "#", with: "|")

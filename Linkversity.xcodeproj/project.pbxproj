@@ -15,6 +15,9 @@
 		532FEE641DB397DC0016226A /* LinkversityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FEE631DB397DC0016226A /* LinkversityTests.swift */; };
 		532FEE6F1DB397DC0016226A /* LinkversityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FEE6E1DB397DC0016226A /* LinkversityUITests.swift */; };
 		532FEE7D1DB39B890016226A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FEE7C1DB39B890016226A /* Colors.swift */; };
+		5357C26B1DBB762800E86DB9 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357C2671DBB762800E86DB9 /* Palette.swift */; };
+		5357C26C1DBB762800E86DB9 /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357C2691DBB762800E86DB9 /* TwicketSegmentedControl.swift */; };
+		5357C26D1DBB762800E86DB9 /* UIViewShadowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357C26A1DBB762800E86DB9 /* UIViewShadowExtension.swift */; };
 		53A1F7A21DB3C6A5000EC481 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1F7A11DB3C6A5000EC481 /* FeedViewController.swift */; };
 		53A1F7A41DB3C6B3000EC481 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1F7A31DB3C6B3000EC481 /* MessageViewController.swift */; };
 		53A1F7A61DB3C6C1000EC481 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1F7A51DB3C6C1000EC481 /* ProfileViewController.swift */; };
@@ -63,6 +66,10 @@
 		532FEE6E1DB397DC0016226A /* LinkversityUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkversityUITests.swift; sourceTree = "<group>"; };
 		532FEE701DB397DC0016226A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		532FEE7C1DB39B890016226A /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5357C2671DBB762800E86DB9 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Palette.swift; path = TwicketSegmentedControl/Palette.swift; sourceTree = "<group>"; };
+		5357C2681DBB762800E86DB9 /* TwicketSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwicketSegmentedControl.h; path = TwicketSegmentedControl/TwicketSegmentedControl.h; sourceTree = "<group>"; };
+		5357C2691DBB762800E86DB9 /* TwicketSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwicketSegmentedControl.swift; path = TwicketSegmentedControl/TwicketSegmentedControl.swift; sourceTree = "<group>"; };
+		5357C26A1DBB762800E86DB9 /* UIViewShadowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewShadowExtension.swift; path = TwicketSegmentedControl/UIViewShadowExtension.swift; sourceTree = "<group>"; };
 		53A1F7A11DB3C6A5000EC481 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		53A1F7A31DB3C6B3000EC481 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		53A1F7A51DB3C6C1000EC481 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +140,7 @@
 		532FEE4D1DB397DC0016226A /* Linkversity */ = {
 			isa = PBXGroup;
 			children = (
+				5357C2661DBB760E00E86DB9 /* TwicketSegmentedControl */,
 				53E654B61DB3D5B40055C24B /* Linkversity.entitlements */,
 				532FEE4E1DB397DC0016226A /* AppDelegate.swift */,
 				532FEE501DB397DC0016226A /* ViewController.swift */,
@@ -168,6 +176,17 @@
 				532FEE701DB397DC0016226A /* Info.plist */,
 			);
 			path = LinkversityUITests;
+			sourceTree = "<group>";
+		};
+		5357C2661DBB760E00E86DB9 /* TwicketSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				5357C2671DBB762800E86DB9 /* Palette.swift */,
+				5357C2681DBB762800E86DB9 /* TwicketSegmentedControl.h */,
+				5357C2691DBB762800E86DB9 /* TwicketSegmentedControl.swift */,
+				5357C26A1DBB762800E86DB9 /* UIViewShadowExtension.swift */,
+			);
+			name = TwicketSegmentedControl;
 			sourceTree = "<group>";
 		};
 		8C2FE22A1A60970921C18D93 /* Pods */ = {
@@ -472,10 +491,13 @@
 				53E654BC1DB5496C0055C24B /* PostViewController.swift in Sources */,
 				532FEE511DB397DC0016226A /* ViewController.swift in Sources */,
 				53A1F7A41DB3C6B3000EC481 /* MessageViewController.swift in Sources */,
+				5357C26C1DBB762800E86DB9 /* TwicketSegmentedControl.swift in Sources */,
 				53E654BA1DB3DC6F0055C24B /* Spring.swift in Sources */,
 				53E654B81DB3D8360055C24B /* RegisterViewController.swift in Sources */,
+				5357C26D1DBB762800E86DB9 /* UIViewShadowExtension.swift in Sources */,
 				532FEE7D1DB39B890016226A /* Colors.swift in Sources */,
 				532FEE4F1DB397DC0016226A /* AppDelegate.swift in Sources */,
+				5357C26B1DBB762800E86DB9 /* Palette.swift in Sources */,
 				53A1F7A61DB3C6C1000EC481 /* ProfileViewController.swift in Sources */,
 				53A1F7A21DB3C6A5000EC481 /* FeedViewController.swift in Sources */,
 			);
