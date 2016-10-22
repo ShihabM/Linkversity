@@ -172,6 +172,21 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         if indexPath.row == 4 {
             return 40;
+        } else if indexPath.row > 4 {
+            if let string: String = self.content2[indexPath.row - 5]  {
+                
+                let someWidth: CGFloat = tableView.frame.size.width - 80
+                let stringAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16)]
+                let attrString: NSAttributedString = NSAttributedString(string: string, attributes: stringAttributes)
+                let frame: CGRect = CGRect(x: 0, y: 0, width: someWidth, height: CGFloat.greatestFiniteMagnitude)
+                let textView: UITextView = UITextView(frame: frame)
+                textView.textStorage.setAttributedString(attrString)
+                textView.sizeToFit()
+                let height: CGFloat = textView.frame.size.height + 10
+                
+                return height
+                
+            }
         }
         return UITableViewAutomaticDimension
     }
@@ -179,6 +194,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.content.count + self.content2.count + 1
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

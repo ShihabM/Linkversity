@@ -15,6 +15,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tableView: UITableView = UITableView()
     var content: [String] = []
     var content2: [String] = []
+    var content3: [String] = []
+    var content4: [String] = []
+    var content5: [String] = []
+    var content6: [String] = []
+    var content7: [Int] = []
+    var content8: [Int] = []
+    var content9: [Int] = []
+    var content10: [Int] = []
     var ref = FIRDatabase.database().reference()
     let defaults = UserDefaults.standard
     
@@ -86,6 +94,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             for item in tempItems {
                 self.content.append(tempItems[x]["text"] as! String)
                 self.content2.append(tempItems[x]["user"] as! String)
+                self.content3.append(tempItems[x]["name"] as! String)
+                self.content4.append(tempItems[x]["uni"] as! String)
+                self.content5.append(tempItems[x]["course"] as! String)
+                self.content6.append(tempItems[x]["date"] as! String)
+                self.content7.append(tempItems[x]["votes"] as! Int)
+                self.content8.append(tempItems[x]["reported"] as! Int)
+                self.content9.append(tempItems[x]["lat"] as! Int)
+                self.content10.append(tempItems[x]["long"] as! Int)
                 x = x + 1
             }
             
@@ -123,6 +139,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     self.content.append(tempItems[x]["text"] as! String)
                     self.content2.append(tempItems[x]["user"] as! String)
+                    self.content3.append(tempItems[x]["name"] as! String)
+                    self.content4.append(tempItems[x]["uni"] as! String)
+                    self.content5.append(tempItems[x]["course"] as! String)
+                    self.content6.append(tempItems[x]["date"] as! String)
+                    self.content7.append(tempItems[x]["votes"] as! Int)
+                    self.content8.append(tempItems[x]["reported"] as! Int)
+                    self.content9.append(tempItems[x]["lat"] as! Int)
+                    self.content10.append(tempItems[x]["long"] as! Int)
                     
                 }
                 x = x + 1
@@ -159,6 +183,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     self.content.append(tempItems[x]["text"] as! String)
                     self.content2.append(tempItems[x]["user"] as! String)
+                    self.content3.append(tempItems[x]["name"] as! String)
+                    self.content4.append(tempItems[x]["uni"] as! String)
+                    self.content5.append(tempItems[x]["course"] as! String)
+                    self.content6.append(tempItems[x]["date"] as! String)
+                    self.content7.append(tempItems[x]["votes"] as! Int)
+                    self.content8.append(tempItems[x]["reported"] as! Int)
+                    self.content9.append(tempItems[x]["lat"] as! Int)
+                    self.content10.append(tempItems[x]["long"] as! Int)
                     
                 }
                 x = x + 1
@@ -174,6 +206,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.content.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+            if let string: String = self.content[indexPath.row]  {
+                
+                let someWidth: CGFloat = tableView.frame.size.width - 80
+                let stringAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16)]
+                let attrString: NSAttributedString = NSAttributedString(string: string, attributes: stringAttributes)
+                let frame: CGRect = CGRect(x: 0, y: 0, width: someWidth, height: CGFloat.greatestFiniteMagnitude)
+                let textView: UITextView = UITextView(frame: frame)
+                textView.textStorage.setAttributedString(attrString)
+                textView.sizeToFit()
+                let height: CGFloat = textView.frame.size.height + 30
+                
+                return height
+                
+            }
+        
+        
+        return 140
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -202,7 +255,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.textLabel?.numberOfLines = 0
         
         tableView.showsVerticalScrollIndicator = false
-        cell.isUserInteractionEnabled = false
+        cell.isUserInteractionEnabled = true
         
         
         return cell
@@ -216,10 +269,25 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("You selected cell #\(indexPath.row)!")
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        
+        var controller = DetailViewController()
+        controller.titleText = self.content[indexPath.row]
+        controller.emailText = self.content2[indexPath.row]
+        controller.nameText = self.content3[indexPath.row]
+        controller.uniText = self.content4[indexPath.row]
+        controller.courseText = self.content5[indexPath.row]
+        controller.dateText = self.content6[indexPath.row]
+        controller.voteText = self.content7[indexPath.row]
+        controller.reportedText = self.content8[indexPath.row]
+        controller.latText = self.content9[indexPath.row]
+        controller.longText = self.content10[indexPath.row]
+        self.present(controller, animated: true, completion: nil)
+        
     }
-
     
     
 }

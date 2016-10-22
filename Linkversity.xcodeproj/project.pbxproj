@@ -18,6 +18,7 @@
 		5357C26B1DBB762800E86DB9 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357C2671DBB762800E86DB9 /* Palette.swift */; };
 		5357C26C1DBB762800E86DB9 /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357C2691DBB762800E86DB9 /* TwicketSegmentedControl.swift */; };
 		5357C26D1DBB762800E86DB9 /* UIViewShadowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357C26A1DBB762800E86DB9 /* UIViewShadowExtension.swift */; };
+		5357C26F1DBB940D00E86DB9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357C26E1DBB940D00E86DB9 /* DetailViewController.swift */; };
 		53A1F7A21DB3C6A5000EC481 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1F7A11DB3C6A5000EC481 /* FeedViewController.swift */; };
 		53A1F7A41DB3C6B3000EC481 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1F7A31DB3C6B3000EC481 /* MessageViewController.swift */; };
 		53A1F7A61DB3C6C1000EC481 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1F7A51DB3C6C1000EC481 /* ProfileViewController.swift */; };
@@ -70,6 +71,7 @@
 		5357C2681DBB762800E86DB9 /* TwicketSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwicketSegmentedControl.h; path = TwicketSegmentedControl/TwicketSegmentedControl.h; sourceTree = "<group>"; };
 		5357C2691DBB762800E86DB9 /* TwicketSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwicketSegmentedControl.swift; path = TwicketSegmentedControl/TwicketSegmentedControl.swift; sourceTree = "<group>"; };
 		5357C26A1DBB762800E86DB9 /* UIViewShadowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewShadowExtension.swift; path = TwicketSegmentedControl/UIViewShadowExtension.swift; sourceTree = "<group>"; };
+		5357C26E1DBB940D00E86DB9 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		53A1F7A11DB3C6A5000EC481 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		53A1F7A31DB3C6B3000EC481 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		53A1F7A51DB3C6C1000EC481 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				53A1F7A51DB3C6C1000EC481 /* ProfileViewController.swift */,
 				53E654B71DB3D8360055C24B /* RegisterViewController.swift */,
 				53E654BB1DB5496C0055C24B /* PostViewController.swift */,
+				5357C26E1DBB940D00E86DB9 /* DetailViewController.swift */,
 				532FEE7C1DB39B890016226A /* Colors.swift */,
 				53E654B91DB3DC6F0055C24B /* Spring.swift */,
 				532FEE521DB397DC0016226A /* Main.storyboard */,
@@ -488,6 +491,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5357C26F1DBB940D00E86DB9 /* DetailViewController.swift in Sources */,
 				53E654BC1DB5496C0055C24B /* PostViewController.swift in Sources */,
 				532FEE511DB397DC0016226A /* ViewController.swift in Sources */,
 				53A1F7A41DB3C6B3000EC481 /* MessageViewController.swift in Sources */,

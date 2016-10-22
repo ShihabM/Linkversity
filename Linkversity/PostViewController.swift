@@ -150,11 +150,11 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
             let month = calendar.component(.month, from: date as Date)
             let year = calendar.component(.year, from: date as Date)
             
-            var dateString = "Posted on \(day)/\(month)/\(year) at \(hour):\(minute)"
+            var dateString = "\(day)/\(month)/\(year), \(hour):\(minute)"
             if String(minute).characters.count < 2 {
-                dateString = "Posted on \(day)/\(month)/\(year) at \(hour):0\(minute)"
+                dateString = "\(day)/\(month)/\(year), \(hour):0\(minute)"
             } else {
-                dateString = "Posted on \(day)/\(month)/\(year) at \(hour):\(minute)"
+                dateString = "\(day)/\(month)/\(year), \(hour):\(minute)"
             }
             
             // Get user details
@@ -173,7 +173,7 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
             
             // Write to Firebase
             let textToPost = self.postField.text
-            let content: NSDictionary = ["text":self.postField.text, "user": user, "name": String(describing: nameData!), "uni": String(describing: uniData!), "course": String(describing: courseData!), "date": dateString, "votes": 0, "reported": 0, "lat": lat, "long": long]
+            let content: NSDictionary = ["text":self.postField.text, "user": user, "name": String(describing: nameData!), "uni": String(describing: uniData!), "course": String(describing: courseData!), "date": dateString, "votes": Int(0), "reported": Int(0), "lat": Int(lat), "long": Int(long)]
             
             var sanitisedString = textToPost?.replacingOccurrences(of: ".", with: "|")
             sanitisedString = sanitisedString?.replacingOccurrences(of: "#", with: "|")
