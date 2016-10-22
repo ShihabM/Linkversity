@@ -263,14 +263,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         // Dictionary for new user
         let user = self.defaults.object(forKey: "user") as? String
         var newUser = [
-            "email" : user,
-            "name" : self.nameField.text,
-            "uni" : self.uniField.text,
-            "course" : self.courseField.text
+            "email" : user!,
+            "name" : self.nameField.text!,
+            "uni" : self.uniField.text!,
+            "course" : self.courseField.text!
         ]
         // Store dictionary in user defaults
-        var userData = NSKeyedArchiver.archivedData(withRootObject: newUser)
-        defaults.set(userData, forKey: (FIRAuth.auth()!.currentUser?.email)!)
+        defaults.set(newUser, forKey: user!)
         
         
         // Dismiss view

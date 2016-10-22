@@ -30,7 +30,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
         self.tableView.reloadData()
         
-        
         loadDataFromFirebase()
         
     }

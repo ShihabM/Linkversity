@@ -84,14 +84,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.logOut!.transform = CGAffineTransform(translationX: 0, y: 0)
         })
         
-        
+        // Populate profile with user data
         let user = self.defaults.object(forKey: "user") as? String
-        let userData = self.defaults.object(forKey: user!) as! [String : String]
+        let userData = self.defaults.dictionary(forKey: user!) as! [String : String]
         var nameData = userData["name"]
         var uniData = userData["uni"]
         var courseData = userData["course"]
         
-        content = ["Name: \(nameData)", "Email: \(user!)", "University: \(uniData)", "Course: \(courseData)"]
+        content = ["Name: \(nameData!)", "Email: \(user!)", "University: \(uniData!)", "Course: \(courseData!)"]
         
         loadDataFromFirebase()
         
