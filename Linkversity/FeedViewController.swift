@@ -95,43 +95,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         })
     }
     
-
-    
-    func loadDataFromFirebaseMy() {
-        
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
-        FIRDatabase.database().reference().observe(.value, with: { snapshot in
-            var tempItems = [NSDictionary]()
-            
-            for item in snapshot.children {
-                let child = item as! FIRDataSnapshot
-                let dict = child.value as! NSDictionary
-                tempItems.append(dict)
-            }
-            
-            self.content = []
-            self.content2 = []
-            var x = 0
-            for item in tempItems {
-                
-                var storedUser = tempItems[x]["user"] as! String
-                let user = self.defaults.object(forKey: "user") as? String
-                if user == storedUser {
-                    
-                    self.content.append(tempItems[x]["text"] as! String)
-                    self.content2.append(tempItems[x]["user"] as! String)
-                    
-                }
-                x = x + 1
-            }
-            
-            self.tableView.reloadData()
-            
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        })
-    }
-    
     
     func loadDataFromFirebaseCampus() {
         
@@ -169,14 +132,44 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         })
-        
-        
-        
-        
-        
-        
-        
     }
+    
+    
+    func loadDataFromFirebaseMy() {
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        FIRDatabase.database().reference().observe(.value, with: { snapshot in
+            var tempItems = [NSDictionary]()
+            
+            for item in snapshot.children {
+                let child = item as! FIRDataSnapshot
+                let dict = child.value as! NSDictionary
+                tempItems.append(dict)
+            }
+            
+            self.content = []
+            self.content2 = []
+            var x = 0
+            for item in tempItems {
+                
+                var storedUser = tempItems[x]["user"] as! String
+                let user = self.defaults.object(forKey: "user") as? String
+                if user == storedUser {
+                    
+                    self.content.append(tempItems[x]["text"] as! String)
+                    self.content2.append(tempItems[x]["user"] as! String)
+                    
+                }
+                x = x + 1
+            }
+            
+            self.tableView.reloadData()
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        })
+    }
+    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

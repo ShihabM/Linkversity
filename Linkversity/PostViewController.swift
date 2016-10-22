@@ -10,8 +10,9 @@
 import Foundation
 import UIKit
 import Firebase
+import CoreLocation
 
-class PostViewController: UIViewController, UITextViewDelegate {
+class PostViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate {
     
     let defaults = UserDefaults.standard
     var post: UIButton?
@@ -19,12 +20,27 @@ class PostViewController: UIViewController, UITextViewDelegate {
     var postImage = UIImage()
     var postField = UITextView(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
     var placeholderLabel = UILabel(frame: CGRect(x: 250, y: 195, width: 60, height: 20))
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colors.blueDark
         
+        // Ask for location authorisation from user and use in foreground
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -125,15 +141,39 @@ class PostViewController: UIViewController, UITextViewDelegate {
             
         } else {
             
+            // Get date and calendar components
+            let date = NSDate()
+            let calendar = NSCalendar.current
+            let hour = calendar.component(.hour, from: date as Date)
+            let minute = calendar.component(.minute, from: date as Date)
+            let day = calendar.component(.day, from: date as Date)
+            let month = calendar.component(.month, from: date as Date)
+            let year = calendar.component(.year, from: date as Date)
             
+            var dateString = "Posted on \(day)/\(month)/\(year) at \(hour):\(minute)"
+            if String(minute).characters.count < 2 {
+                dateString = "Posted on \(day)/\(month)/\(year) at \(hour):0\(minute)"
+            } else {
+                dateString = "Posted on \(day)/\(month)/\(year) at \(hour):\(minute)"
+            }
+            
+            // Get user details
             let user = self.defaults.object(forKey: "user") as! String
             let userData = self.defaults.dictionary(forKey: user) as! [String : String]
+            var nameData = userData["name"]
             var uniData = userData["uni"]
+            var courseData = userData["course"]
+            
+            
+            // Get location
+            let locValue:CLLocationCoordinate2D = CLLocationManager().location!.coordinate
+            var lat = locValue.latitude
+            var long = locValue.longitude
+            
             
             // Write to Firebase
-            
             let textToPost = self.postField.text
-            let content: NSDictionary = ["text":self.postField.text, "user": user, "uni": String(describing: uniData!)]
+            let content: NSDictionary = ["text":self.postField.text, "user": user, "name": String(describing: nameData!), "uni": String(describing: uniData!), "course": String(describing: courseData!), "date": dateString, "votes": 0, "reported": 0, "lat": lat, "long": long]
             
             var sanitisedString = textToPost?.replacingOccurrences(of: ".", with: "|")
             sanitisedString = sanitisedString?.replacingOccurrences(of: "#", with: "|")

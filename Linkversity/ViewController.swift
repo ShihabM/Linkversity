@@ -92,13 +92,6 @@ class ViewController: UITabBarController {
         
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        
-
-    }
-    
     func more(button: UIButton) {
         
     }
