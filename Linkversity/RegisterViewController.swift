@@ -14,22 +14,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     var logIn: UIButton?
     var register: UIButton?
+    var begin: UIButton?
     let defaults = UserDefaults.standard
     var emailField = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
     var passwordField = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
+    var nameField = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
+    var uniField = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
+    var courseField = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colors.blueDark
         
-        /*
-         FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
-         if user != nil {
-         self.dismiss(animated: true, completion: nil)
-         }
-         }
-         */
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -128,7 +125,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if self.emailField.isFirstResponder {
+        if self.emailField.isFirstResponder || self.nameField.isFirstResponder || self.uniField.isFirstResponder {
             self.passwordField.becomeFirstResponder()
         } else {
             self.view.endEditing(true)
@@ -140,6 +137,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     func register(button: UIButton) {
+        
+        
+        
+        
         
         // Get text from fields
         let email = self.emailField.text
@@ -155,12 +156,98 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                         FIRAuth.auth()!.signIn(withEmail: email!, password: password!)
                                         self.defaults.set(user?.email, forKey: "user")
                                         
-                                        // Dismiss view
-                                        let register = self.defaults.object(forKey: "hasRegistered") as? Int
-                                        if register != nil {
-                                            self.defaults.set(3, forKey: "hasRegistered")
-                                        }
-                                        self.dismiss(animated: true, completion: nil)
+                                        
+                                        
+                                        
+                                        
+                                        // Name text field
+                                        self.nameField = UITextField(frame: CGRect(x: 40, y: 110, width: self.view.bounds.width - 80, height: 40))
+                                        self.nameField.font = UIFont.systemFont(ofSize: 18)
+                                        self.nameField.autocorrectionType = UITextAutocorrectionType.no
+                                        self.nameField.keyboardType = UIKeyboardType.default
+                                        self.nameField.returnKeyType = UIReturnKeyType.next
+                                        self.nameField.tintColor = Colors.blueAlternative
+                                        self.nameField.textColor = Colors.white
+                                        self.nameField.backgroundColor = Colors.blueDark
+                                        self.nameField.attributedPlaceholder = NSAttributedString(string:"Name (Or nickname, be creative...)", attributes:[NSForegroundColorAttributeName: Colors.blueDim])
+                                        self.nameField.delegate = self
+                                        self.nameField.alpha = 0
+                                        self.view.addSubview(self.nameField)
+                                        
+                                        // Translate animation using MengTo's Spring library
+                                        springWithDelay(duration: 1, delay: 0, animations: {
+                                            self.emailField.alpha = 0
+                                            self.passwordField.alpha = 0
+                                            self.nameField.alpha = 1
+                                        })
+                                        
+                                        
+                                        
+                                        // University text field
+                                        self.uniField = UITextField(frame: CGRect(x: 40, y: 160, width: self.view.bounds.width - 80, height: 40))
+                                        self.uniField.font = UIFont.systemFont(ofSize: 18)
+                                        self.uniField.autocorrectionType = UITextAutocorrectionType.no
+                                        self.uniField.keyboardType = UIKeyboardType.default
+                                        self.uniField.returnKeyType = UIReturnKeyType.next
+                                        self.uniField.tintColor = Colors.blueAlternative
+                                        self.uniField.textColor = Colors.white
+                                        self.uniField.backgroundColor = Colors.blueDark
+                                        self.uniField.attributedPlaceholder = NSAttributedString(string:"University", attributes:[NSForegroundColorAttributeName: Colors.blueDim])
+                                        self.uniField.delegate = self
+                                        self.uniField.alpha = 0
+                                        self.view.addSubview(self.uniField)
+                                        
+                                        // Translate animation using MengTo's Spring library
+                                        springWithDelay(duration: 1.1, delay: 0.3, animations: {
+                                            self.uniField.alpha = 1
+                                        })
+                                        
+                                        
+                                        
+                                        // course text field
+                                        self.courseField = UITextField(frame: CGRect(x: 40, y: 210, width: self.view.bounds.width - 80, height: 40))
+                                        self.courseField.font = UIFont.systemFont(ofSize: 18)
+                                        self.courseField.autocorrectionType = UITextAutocorrectionType.no
+                                        self.courseField.keyboardType = UIKeyboardType.default
+                                        self.courseField.returnKeyType = UIReturnKeyType.done
+                                        self.courseField.tintColor = Colors.blueAlternative
+                                        self.courseField.textColor = Colors.white
+                                        self.courseField.backgroundColor = Colors.blueDark
+                                        self.courseField.attributedPlaceholder = NSAttributedString(string:"Course", attributes:[NSForegroundColorAttributeName: Colors.blueDim])
+                                        self.courseField.delegate = self
+                                        self.courseField.alpha = 0
+                                        self.view.addSubview(self.courseField)
+                                        
+                                        // Translate animation using MengTo's Spring library
+                                        springWithDelay(duration: 1.3, delay: 0.4, animations: {
+                                            self.courseField.alpha = 1
+                                        })
+                                        
+                                        
+                                        
+                                        
+
+                                        // Begin button
+                                        self.begin = UIButton(type: UIButtonType.custom)
+                                        self.begin!.frame = CGRect(x: self.view.bounds.width/2 - 75, y: self.view.bounds.height - 70, width: 150, height: 50)
+                                        self.begin!.alpha = 0
+                                        self.begin!.layer.cornerRadius = 25
+                                        self.begin!.backgroundColor = Colors.blueAlternative
+                                        self.begin!.setTitle("Let's go!", for: .normal)
+                                        self.begin!.addTarget(self, action: #selector(self.begin(button:)), for: .touchUpInside)
+                                        self.begin!.setTitleColor(Colors.white, for: .normal)
+                                        self.view.addSubview(self.begin!)
+                                        
+                                        // Translate animation using MengTo's Spring library
+                                        self.begin!.transform = CGAffineTransform(translationX: 0, y: 100)
+                                        springWithDelay(duration: 0.9, delay: 0.05, animations: {
+                                            self.logIn?.alpha = 0
+                                            self.register?.alpha = 0
+                                            self.begin!.alpha = 1
+                                            self.begin!.transform = CGAffineTransform(translationX: 0, y: 0)
+                                        })
+                                        
+                                        
                                         
 
                                     }
@@ -169,6 +256,29 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
         
         
+    }
+    
+    func begin(button: UIButton) {
+        
+        // Dictionary for new user
+        let user = self.defaults.object(forKey: "user") as? String
+        var newUser = [
+            "email" : user,
+            "name" : self.nameField.text,
+            "uni" : self.uniField.text,
+            "course" : self.courseField.text
+        ]
+        // Store dictionary in user defaults
+        var userData = NSKeyedArchiver.archivedData(withRootObject: newUser)
+        defaults.set(userData, forKey: (FIRAuth.auth()!.currentUser?.email)!)
+        
+        
+        // Dismiss view
+        let register = self.defaults.object(forKey: "hasRegistered") as? Int
+        if register != nil {
+            self.defaults.set(3, forKey: "hasRegistered")
+        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     func logIn(button: UIButton) {

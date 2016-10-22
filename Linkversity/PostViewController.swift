@@ -13,6 +13,7 @@ import Firebase
 
 class PostViewController: UIViewController, UITextViewDelegate {
     
+    let defaults = UserDefaults.standard
     var post: UIButton?
     var dismiss: UIButton?
     var postImage = UIImage()
@@ -124,21 +125,25 @@ class PostViewController: UIViewController, UITextViewDelegate {
             
         } else {
             
-            //Firebase write-------------------------------------------------------------------
             
-                let textToPost = self.postField.text
-                let content: NSDictionary = ["text":self.postField.text]
+            let user = defaults.object(forKey: "user") as! String
             
-                var sanitisedString = textToPost?.replacingOccurrences(of: ".", with: "|")
-                sanitisedString = sanitisedString?.replacingOccurrences(of: "#", with: "|")
-                sanitisedString = sanitisedString?.replacingOccurrences(of: "$", with: "|")
-                sanitisedString = sanitisedString?.replacingOccurrences(of: "[", with: "|")
-                sanitisedString = sanitisedString?.replacingOccurrences(of: "]", with: "|")
+            // Write to Firebase
             
-                let database = FIRDatabase.database().reference().child(byAppendingPath: sanitisedString!)
-                database.setValue(content)
+            let textToPost = self.postField.text
+            let content: NSDictionary = ["text":self.postField.text, "user": user]
+            
+            var sanitisedString = textToPost?.replacingOccurrences(of: ".", with: "|")
+            sanitisedString = sanitisedString?.replacingOccurrences(of: "#", with: "|")
+            sanitisedString = sanitisedString?.replacingOccurrences(of: "$", with: "|")
+            sanitisedString = sanitisedString?.replacingOccurrences(of: "[", with: "|")
+            sanitisedString = sanitisedString?.replacingOccurrences(of: "]", with: "|")
+            
+            let database = FIRDatabase.database().reference().child(byAppendingPath: sanitisedString!)
+            database.setValue(content)
             
             
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setLoad"), object: textToPost)
             self.dismiss(animated: true, completion: nil)
         }
     }
