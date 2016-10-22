@@ -13,10 +13,15 @@ import Firebase
 import MapKit
 import CoreLocation
 
-class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     let defaults = UserDefaults.standard
     var dismiss: UIButton?
+    var up: UIButton?
+    var down: UIButton?
+    var reply: UIButton?
+    var flag: UIButton?
+    var share: UIButton?
     var dateLabel = UILabel(frame: CGRect(x: 250, y: 195, width: 60, height: 20))
     var postText = UITextView(frame: CGRect(x: 250, y: 195, width: 60, height: 20))
     var infoText = UILabel(frame: CGRect(x: 250, y: 195, width: 60, height: 20))
@@ -32,50 +37,26 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var longText = 0
     let locationManager = CLLocationManager()
     var mapView: MKMapView = MKMapView()
+    var tableView: UITableView = UITableView()
+    var content: [String] = ["1", "2", "3", "4", "5", "6"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colors.blueDark
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        // Ask for location authorisation from user and use in foreground
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
         
-        // dismiss button
-        self.dismiss = UIButton(type: UIButtonType.custom)
-        self.dismiss!.frame = CGRect(x: 10, y: 20, width: 45, height: 45)
-        self.dismiss!.alpha = 0
-        self.dismiss!.layer.cornerRadius = 25
-        self.dismiss!.backgroundColor = UIColor.clear
-        self.dismiss!.addTarget(self, action: #selector(dismiss(button:)), for: .touchUpInside)
-        var dismissImage = UIImage(named: "cross.png") as UIImage?
-        dismissImage = dismissImage?.imageWithColor(color1: Colors.blueDim).withRenderingMode(.alwaysOriginal)
-        self.dismiss!.setImage(dismissImage, for: .normal)
-        self.dismiss!.imageEdgeInsets = UIEdgeInsetsMake(14, 14, 14, 14)
-        self.view.addSubview(dismiss!)
-        
-        // Translate animation using MengTo's Spring library
-        self.dismiss!.transform = CGAffineTransform(translationX: 0, y: -100)
-        springWithDelay(duration: 0.65, delay: 0, animations: {
-            self.dismiss!.alpha = 1
-            self.dismiss!.transform = CGAffineTransform(translationX: 0, y: 0)
-        })
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
         
         
-        // Date label
-        dateLabel = UILabel(frame: CGRect(x: 50, y: 20, width: self.view.bounds.width - 70, height: 40))
-        dateLabel.font = UIFont.systemFont(ofSize: 12)
-        dateLabel.textAlignment = NSTextAlignment.right
-        dateLabel.text = self.dateText
-        dateLabel.textColor = Colors.blueDim
-        dateLabel.backgroundColor = UIColor.clear
-        self.view.addSubview(dateLabel)
         
-        // Translate animation using MengTo's Spring library
-        springWithDelay(duration: 0.65, delay: 0, animations: {
-            self.dateLabel.alpha = 1
-        })
         
         
         // Post text label
@@ -114,11 +95,13 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
-        self.view.addSubview(mapView)
         mapView.tintColor = Colors.blueAlternative
+        self.view.addSubview(mapView)
         
-        let locValue:CLLocationCoordinate2D = CLLocationManager().location!.coordinate
-        mapView.setCenter(locValue, animated: true)
+        // Zoom in on map to region
+        let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(self.latText), longitude: CLLocationDegrees(self.longText))
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        self.mapView.setRegion(region, animated: true)
         
         // Drop a pin
         let newYorkLocation = CLLocationCoordinate2DMake(CLLocationDegrees(self.latText), CLLocationDegrees(self.longText))
@@ -127,34 +110,230 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         dropPin.title = "You posted here"
         mapView.addAnnotation(dropPin)
         
-    }
-    /*
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if (annotation is MKUserLocation) {
-            return nil
-        }
         
-        if (annotation.isKindOfClass(CustomAnnotation)) {
-            let customAnnotation = annotation as? CustomAnnotation
-            mapView.translatesAutoresizingMaskIntoConstraints = false
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "CustomAnnotation") as MKAnnotationView!
-            
-            if (annotationView == nil) {
-                annotationView = customAnnotation?.annotationView()
-            } else {
-                annotationView?.annotation = annotation;
-            }
-            
-            self.addBounceAnimationToView(annotationView)
-            return annotationView
-        } else {
-            return nil
-        }
+        
+
+        
     }
-    */
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        // Action buttons
+        
+        // share button
+        self.share = UIButton(type: UIButtonType.custom)
+        self.share!.frame = CGRect(x: 0, y: 370, width: (self.view.bounds.width/5), height: 60)
+        self.share!.alpha = 0
+        self.share!.layer.cornerRadius = 25
+        self.share!.backgroundColor = UIColor.clear
+        self.share!.addTarget(self, action: #selector(share(button:)), for: .touchUpInside)
+        var shareImage = UIImage(named: "share.png") as UIImage?
+        shareImage = shareImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+        self.share!.setImage(shareImage, for: .normal)
+        self.share!.imageEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+        self.view.addSubview(share!)
+        // Translate animation using MengTo's Spring library
+        self.share!.transform = CGAffineTransform(translationX: 0, y: 100)
+        springWithDelay(duration: 0.7, delay: 0.03, animations: {
+            self.share!.alpha = 1
+            self.share!.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        // flag button
+        self.flag = UIButton(type: UIButtonType.custom)
+        self.flag!.frame = CGRect(x: (self.view.bounds.width/5), y: 370, width: (self.view.bounds.width/5), height: 60)
+        self.flag!.alpha = 0
+        self.flag!.layer.cornerRadius = 25
+        self.flag!.backgroundColor = UIColor.clear
+        self.flag!.addTarget(self, action: #selector(dismiss(button:)), for: .touchUpInside)
+        var flagImage = UIImage(named: "flag.png") as UIImage?
+        flagImage = flagImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+        self.flag!.setImage(flagImage, for: .normal)
+        self.flag!.imageEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+        self.view.addSubview(flag!)
+        // Translate animation using MengTo's Spring library
+        self.flag!.transform = CGAffineTransform(translationX: 0, y: 100)
+        springWithDelay(duration: 0.65, delay: 0.15, animations: {
+            self.flag!.alpha = 1
+            self.flag!.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        // reply button
+        self.reply = UIButton(type: UIButtonType.custom)
+        self.reply!.frame = CGRect(x: (self.view.bounds.width/5)*2, y: 370, width: (self.view.bounds.width/5), height: 60)
+        self.reply!.alpha = 0
+        self.reply!.layer.cornerRadius = 25
+        self.reply!.backgroundColor = UIColor.clear
+        self.reply!.addTarget(self, action: #selector(reply(button:)), for: .touchUpInside)
+        var replyImage = UIImage(named: "reply.png") as UIImage?
+        replyImage = replyImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+        self.reply!.setImage(replyImage, for: .normal)
+        self.reply!.imageEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+        self.view.addSubview(reply!)
+        // Translate animation using MengTo's Spring library
+        self.reply!.transform = CGAffineTransform(translationX: 0, y: 100)
+        springWithDelay(duration: 0.67, delay: 0.17, animations: {
+            self.reply!.alpha = 1
+            self.reply!.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        // downvote button
+        self.down = UIButton(type: UIButtonType.custom)
+        self.down!.frame = CGRect(x: (self.view.bounds.width/5)*3, y: 370, width: (self.view.bounds.width/5), height: 60)
+        self.down!.alpha = 0
+        self.down!.layer.cornerRadius = 25
+        self.down!.backgroundColor = UIColor.clear
+        self.down!.addTarget(self, action: #selector(dismiss(button:)), for: .touchUpInside)
+        var downImage = UIImage(named: "down.png") as UIImage?
+        downImage = downImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+        self.down!.setImage(downImage, for: .normal)
+        self.down!.imageEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+        self.view.addSubview(down!)
+        // Translate animation using MengTo's Spring library
+        self.down!.transform = CGAffineTransform(translationX: 0, y: 100)
+        springWithDelay(duration: 0.65, delay: 0.19, animations: {
+            self.down!.alpha = 1
+            self.down!.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        // upvote button
+        self.up = UIButton(type: UIButtonType.custom)
+        self.up!.frame = CGRect(x: (self.view.bounds.width/5)*4, y: 370, width: (self.view.bounds.width/5), height: 60)
+        self.up!.alpha = 0
+        self.up!.layer.cornerRadius = 25
+        self.up!.backgroundColor = UIColor.clear
+        self.up!.addTarget(self, action: #selector(dismiss(button:)), for: .touchUpInside)
+        var upImage = UIImage(named: "up.png") as UIImage?
+        upImage = upImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+        self.up!.setImage(upImage, for: .normal)
+        self.up!.imageEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+        self.view.addSubview(up!)
+        // Translate animation using MengTo's Spring library
+        self.up!.transform = CGAffineTransform(translationX: 0, y: 100)
+        springWithDelay(duration: 0.8, delay: 0.21, animations: {
+            self.up!.alpha = 1
+            self.up!.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        
+
+        
+        
+        
+        // dismiss button
+        self.dismiss = UIButton(type: UIButtonType.custom)
+        self.dismiss!.frame = CGRect(x: 10, y: 20, width: 45, height: 45)
+        self.dismiss!.alpha = 0
+        self.dismiss!.layer.cornerRadius = 25
+        self.dismiss!.backgroundColor = UIColor.clear
+        self.dismiss!.addTarget(self, action: #selector(dismiss(button:)), for: .touchUpInside)
+        var dismissImage = UIImage(named: "cross.png") as UIImage?
+        dismissImage = dismissImage?.imageWithColor(color1: Colors.blueDim).withRenderingMode(.alwaysOriginal)
+        self.dismiss!.setImage(dismissImage, for: .normal)
+        self.dismiss!.imageEdgeInsets = UIEdgeInsetsMake(14, 14, 14, 14)
+        self.view.addSubview(dismiss!)
+        
+        // Translate animation using MengTo's Spring library
+        self.dismiss!.transform = CGAffineTransform(translationX: 0, y: -100)
+        springWithDelay(duration: 0.65, delay: 0.15, animations: {
+            self.dismiss!.alpha = 1
+            self.dismiss!.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        
+        // Date label
+        dateLabel = UILabel(frame: CGRect(x: 50, y: 20, width: self.view.bounds.width - 70, height: 40))
+        dateLabel.font = UIFont.systemFont(ofSize: 12)
+        dateLabel.textAlignment = NSTextAlignment.right
+        dateLabel.text = self.dateText
+        dateLabel.textColor = Colors.blueDim
+        dateLabel.backgroundColor = UIColor.clear
+        self.view.addSubview(dateLabel)
+        
+        // Translate animation using MengTo's Spring library
+        springWithDelay(duration: 1, delay: 0.23, animations: {
+            self.dateLabel.alpha = 1
+        })
+        
+        
+        
+        // Create the table and set its datasource and delegate
+        tableView.frame = CGRect(x: 0, y: 430, width: self.view.bounds.width - 0, height: (self.view.bounds.height - 430));
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = Colors.blueDark
+        tableView.separatorStyle = .none
+        tableView.alpha = 0
+        self.view.addSubview(tableView)
+        self.tableView.reloadData()
+        
+        // Translate animation using MengTo's Spring library
+        self.tableView.transform = CGAffineTransform(translationX: 0, y: 100)
+        springWithDelay(duration: 0.65, delay: 0.2, animations: {
+            self.tableView.alpha = 1
+            self.tableView.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.content.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "subtitleCell")
+        
+        cell.textLabel?.text = self.content[indexPath.row]
+        cell.detailTextLabel?.text = "Test detail"
+        
+        // Row background shade for rows with content
+        if indexPath.row < self.content.count + 1 {
+            cell.backgroundColor = Colors.blueDim
+        } else {
+            cell.backgroundColor = Colors.blueDark
+        }
+        cell.textLabel?.textColor = Colors.white
+        cell.detailTextLabel?.textColor = UIColor.lightGray
+        
+        cell.layoutMargins = UIEdgeInsets.zero
+        cell.separatorInset = UIEdgeInsets.zero
+        
+        cell.textLabel!.font = UIFont.systemFont(ofSize: 16)
+        cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 12)
+        cell.textLabel?.numberOfLines = 0
+        
+        tableView.showsVerticalScrollIndicator = false
+        cell.isUserInteractionEnabled = false
+        
+        
+        return cell
+        
+    }
+
     
     func dismiss(button: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    func reply(button: UIButton) {
+        var controller = ReplyViewController()
+        controller.titleText = self.titleText
+        self.present(controller, animated: true, completion: nil)
+    }
+    func share(button: UIButton) {
+        
+        // Share the main post, bring up a Share Sheet
+        
+        let textToShare = self.titleText
+        
+        let objectsToShare = [textToShare]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
+        activityVC.popoverPresentationController?.sourceView = button as! UIView
+        self.present(activityVC, animated: true, completion: nil)
+
     }
     
 }

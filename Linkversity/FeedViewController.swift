@@ -238,7 +238,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.textLabel?.text = self.content[indexPath.row]
         cell.detailTextLabel?.text = "Posted by: \(self.content2[indexPath.row])"
         
-        // Every other row has a different background shade
+        // Row background shade for rows with content
         if indexPath.row < self.content.count + 1 {
             cell.backgroundColor = Colors.white
         } else {
@@ -272,6 +272,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
         
         
         var controller = DetailViewController()

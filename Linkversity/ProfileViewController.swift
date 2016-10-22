@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var content: [String] = ["Name:", "Email:", "University:", "Course:"]
     var content2: [String] = []
     var content3: [String] = []
+    var content4: [String] = []
     var ref = FIRDatabase.database().reference()
     var imageView = UIImageView()
     let defaults = UserDefaults.standard
@@ -127,6 +128,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     
                     self.content2.append(tempItems[x]["text"] as! String)
                     self.content3.append(tempItems[x]["user"] as! String)
+                    self.content4.append(tempItems[x]["date"] as! String)
                     
                 }
                 x = x + 1
@@ -182,7 +184,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let textView: UITextView = UITextView(frame: frame)
                 textView.textStorage.setAttributedString(attrString)
                 textView.sizeToFit()
-                let height: CGFloat = textView.frame.size.height + 10
+                let height: CGFloat = textView.frame.size.height + 30
                 
                 return height
                 
@@ -209,7 +211,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.layoutMargins = UIEdgeInsets.zero
             cell.separatorInset = UIEdgeInsets.zero
             
-            cell.textLabel!.font = UIFont.systemFont(ofSize: 12)
+            cell.textLabel!.font = UIFont.systemFont(ofSize: 16)
             cell.textLabel?.numberOfLines = 0
             
             tableView.showsVerticalScrollIndicator = false
@@ -243,10 +245,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             
             
-            let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "subtitleCell")
+            let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "subtitleCell")
             
             cell.textLabel?.text = self.content2[indexPath.row - 5]
-            //cell.detailTextLabel?.text = "Posted by: \(self.content3[indexPath.row - 5])"
+            cell.detailTextLabel?.text = self.content4[indexPath.row - 5]
             
             cell.backgroundColor = Colors.white
             
@@ -257,7 +259,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.separatorInset = UIEdgeInsets.zero
             
             cell.textLabel!.font = UIFont.systemFont(ofSize: 16)
-            //cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 12)
+            cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 12)
             cell.textLabel?.numberOfLines = 0
             
             tableView.showsVerticalScrollIndicator = false
