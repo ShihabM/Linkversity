@@ -377,13 +377,6 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "subtitleCell")
         
-        
-        print("----------------------")
-        print(repArray)
-        print("==================")
-        print(repArray2)
-        
-        
         cell.textLabel?.text = self.repArray[indexPath.row]
         cell.detailTextLabel?.text = self.repArray2[indexPath.row]
         

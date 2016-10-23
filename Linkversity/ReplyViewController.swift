@@ -163,13 +163,13 @@ class ReplyViewController: UIViewController, UITextViewDelegate, CLLocationManag
             let uniData = userData["uni"]
             let courseData = userData["course"]
             
-            let profile = FIRDatabase.database().reference().child(sanitisedString).child(byAppendingPath: "replies")
-            let profile1 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(byAppendingPath: sanitisedString2)
-            let profile2 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("reply").setValue(self.postField.text)
-            let profile3 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUser").setValue(nameData!)
-            let profile4 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUserEmail").setValue(emailData!)
-            let profile5 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUserUni").setValue(uniData!)
-            let profile6 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUserCourse").setValue(courseData!)
+            FIRDatabase.database().reference().child(sanitisedString).child(byAppendingPath: "replies")
+            FIRDatabase.database().reference().child(sanitisedString).child("replies").child(byAppendingPath: sanitisedString2)
+            FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("reply").setValue(self.postField.text)
+            FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUser").setValue(nameData!)
+            FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUserEmail").setValue(emailData!)
+            FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUserUni").setValue(uniData!)
+            FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUserCourse").setValue(courseData!)
             
             
             self.dismiss(animated: true, completion: nil)

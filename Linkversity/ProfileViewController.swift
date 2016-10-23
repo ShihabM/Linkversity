@@ -17,6 +17,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var content2: [String] = []
     var content3: [String] = []
     var content4: [String] = []
+    var content5: [String] = []
+    var content6: [String] = []
+    var content7: [String] = []
+    var content8: [Int] = []
+    var content9: [Int] = []
+    var content10: [Int] = []
+    var content11: [Int] = []
     var ref = FIRDatabase.database().reference()
     var imageView = UIImageView()
     var imageView2 = UIImageView()
@@ -147,6 +154,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.content2.append(tempItems[x]["text"] as! String)
                     self.content3.append(tempItems[x]["user"] as! String)
                     self.content4.append(tempItems[x]["date"] as! String)
+                    self.content5.append(tempItems[x]["name"] as! String)
+                    self.content6.append(tempItems[x]["uni"] as! String)
+                    self.content7.append(tempItems[x]["course"] as! String)
+                    var vote = (tempItems[x]["votes"] as! String)
+                    self.content8.append(Int(vote)!)
+                    var report = (tempItems[x]["reported"] as! String)
+                    self.content9.append(Int(report)!)
+                    self.content10.append(tempItems[x]["lat"] as! Int)
+                    self.content11.append(tempItems[x]["long"] as! Int)
                     
                 }
                 x = x + 1
@@ -281,7 +297,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.textLabel?.numberOfLines = 0
             
             tableView.showsVerticalScrollIndicator = false
-            cell.isUserInteractionEnabled = false
+            cell.isUserInteractionEnabled = true
             
             
             return cell
@@ -297,8 +313,26 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("You selected cell #\(indexPath.row)!")
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row > 4 {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        
+        
+        var controller = DetailViewController()
+        controller.titleText = self.content2[indexPath.row - 5]
+        controller.emailText = self.content3[indexPath.row - 5]
+        controller.nameText = self.content5[indexPath.row - 5]
+        controller.uniText = self.content6[indexPath.row - 5]
+        controller.courseText = self.content7[indexPath.row - 5]
+        controller.dateText = self.content4[indexPath.row - 5]
+        controller.voteText = self.content8[indexPath.row - 5]
+        controller.reportedText = self.content9[indexPath.row - 5]
+        controller.latText = self.content10[indexPath.row - 5]
+        controller.longText = self.content11[indexPath.row - 5]
+        self.present(controller, animated: true, completion: nil)
+        }
     }
+    
     
 }
