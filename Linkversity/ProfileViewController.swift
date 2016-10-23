@@ -100,7 +100,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.logOut!.backgroundColor = Colors.blueDark
         self.logOut!.setTitle("Log Out", for: .normal)
         self.logOut!.addTarget(self, action: #selector(logOut(button:)), for: .touchUpInside)
-        self.logOut!.setTitleColor(Colors.white, for: .normal)
+        self.logOut!.setTitleColor(Colors.blueDim, for: .normal)
         self.view.addSubview(logOut!)
         
         // Translate animation using MengTo's Spring library
@@ -284,7 +284,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.textLabel?.text = self.content2[indexPath.row - 5]
             cell.detailTextLabel?.text = self.content4[indexPath.row - 5]
             
-            cell.backgroundColor = Colors.white
+            if indexPath.row % 2 == 1 {
+                cell.backgroundColor = Colors.white
+            } else {
+                cell.backgroundColor = Colors.cellAlternative
+            }
             
             cell.textLabel?.textColor = Colors.grayDark
             cell.detailTextLabel?.textColor = UIColor.gray
@@ -293,7 +297,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.separatorInset = UIEdgeInsets.zero
             
             cell.textLabel!.font = UIFont.systemFont(ofSize: 16)
-            cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 12)
+            cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: 12)
             cell.textLabel?.numberOfLines = 0
             
             tableView.showsVerticalScrollIndicator = false

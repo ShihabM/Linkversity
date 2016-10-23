@@ -388,17 +388,24 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             cell.backgroundColor = Colors.blueDark
         }
         cell.textLabel?.textColor = Colors.white
-        cell.detailTextLabel?.textColor = UIColor.lightGray
+        cell.detailTextLabel?.textColor = Colors.blueDark
         
         cell.layoutMargins = UIEdgeInsets.zero
         cell.separatorInset = UIEdgeInsets.zero
         
         cell.textLabel!.font = UIFont.systemFont(ofSize: 16)
-        cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 12)
+        cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: 12)
         cell.textLabel?.numberOfLines = 0
         
         tableView.showsVerticalScrollIndicator = false
         cell.isUserInteractionEnabled = false
+        
+        
+        
+        // Cell image
+        var feedImage = UIImage(named: "profile.png") as UIImage?
+        feedImage = feedImage?.imageWithColor(color1: Colors.blueDark).withRenderingMode(.alwaysOriginal)
+        cell.imageView?.image = feedImage
         
         
         return cell

@@ -18,4 +18,5 @@ struct Colors {
     static let grayDark = UIColor(red: 62/250, green: 62/250, blue: 62/250, alpha: 1.0)
     static let white = UIColor.white
     static var cellNorm = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
+    static var cellAlternative = UIColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1.0)
 }

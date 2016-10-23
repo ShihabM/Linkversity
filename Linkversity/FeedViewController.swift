@@ -246,7 +246,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Row background shade for rows with content
         if indexPath.row < self.content.count + 1 {
-            cell.backgroundColor = Colors.white
+            if indexPath.row % 2 == 0 {
+                cell.backgroundColor = Colors.white
+            } else {
+                cell.backgroundColor = Colors.cellAlternative
+            }
         } else {
             cell.backgroundColor = Colors.cellNorm
         }
@@ -257,12 +261,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.separatorInset = UIEdgeInsets.zero
         
         cell.textLabel!.font = UIFont.systemFont(ofSize: 16)
-        cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 12)
+        cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: 12)
         cell.textLabel?.numberOfLines = 0
         
         tableView.showsVerticalScrollIndicator = false
         cell.isUserInteractionEnabled = true
         
+        
+        // Cell image
+        var feedImage = UIImage(named: "profile.png") as UIImage?
+        feedImage = feedImage?.imageWithColor(color1: Colors.blueDim).withRenderingMode(.alwaysOriginal)
+        cell.imageView?.image = feedImage
         
         return cell
         
