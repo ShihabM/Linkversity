@@ -173,7 +173,7 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
             
             // Write to Firebase
             let textToPost = self.postField.text
-            let content: NSDictionary = ["text":self.postField.text, "user": user, "name": String(describing: nameData!), "uni": String(describing: uniData!), "course": String(describing: courseData!), "date": dateString, "votes": Int(0), "reported": Int(0), "lat": Int(lat), "long": Int(long)]
+            let content: NSDictionary = ["text":self.postField.text, "user": user, "name": String(describing: nameData!), "uni": String(describing: uniData!), "course": String(describing: courseData!), "date": dateString, "votes": "0", "reported": "0", "lat": Int(lat), "long": Int(long)]
             
             var sanitisedString = textToPost?.replacingOccurrences(of: ".", with: "|")
             sanitisedString = sanitisedString?.replacingOccurrences(of: "#", with: "|")

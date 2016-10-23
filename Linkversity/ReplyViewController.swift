@@ -142,7 +142,7 @@ class ReplyViewController: UIViewController, UITextViewDelegate, CLLocationManag
         } else {
             
             
-            // Update Firebase message with replies 
+            // Update Firebase message with replies
             
             var sanitisedString = self.titleText.replacingOccurrences(of: ".", with: "|")
             sanitisedString = sanitisedString.replacingOccurrences(of: "#", with: "|")
@@ -150,15 +150,26 @@ class ReplyViewController: UIViewController, UITextViewDelegate, CLLocationManag
             sanitisedString = sanitisedString.replacingOccurrences(of: "[", with: "|")
             sanitisedString = sanitisedString.replacingOccurrences(of: "]", with: "|")
             
+            var sanitisedString2 = self.postField.text.replacingOccurrences(of: ".", with: "|")
+            sanitisedString2 = sanitisedString2.replacingOccurrences(of: "#", with: "|")
+            sanitisedString2 = sanitisedString2.replacingOccurrences(of: "$", with: "|")
+            sanitisedString2 = sanitisedString2.replacingOccurrences(of: "[", with: "|")
+            sanitisedString2 = sanitisedString2.replacingOccurrences(of: "]", with: "|")
+            
             let user = self.defaults.object(forKey: "user") as? String
             let userData = self.defaults.dictionary(forKey: user!) as! [String : String]
-            var nameData = userData["name"]
-            var uniData = userData["uni"]
-            var courseData = userData["course"]
+            let emailData = userData["email"]
+            let nameData = userData["name"]
+            let uniData = userData["uni"]
+            let courseData = userData["course"]
             
             let profile = FIRDatabase.database().reference().child(sanitisedString).child(byAppendingPath: "replies")
-            let profile2 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child("reply").setValue(self.postField.text)
-            let profile3 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child("replyUser").setValue(nameData!)
+            let profile1 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(byAppendingPath: sanitisedString2)
+            let profile2 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("reply").setValue(self.postField.text)
+            let profile3 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUser").setValue(nameData!)
+            let profile4 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUserEmail").setValue(emailData!)
+            let profile5 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUserUni").setValue(uniData!)
+            let profile6 = FIRDatabase.database().reference().child(sanitisedString).child("replies").child(sanitisedString2).child("replyUserCourse").setValue(courseData!)
             
             
             self.dismiss(animated: true, completion: nil)

@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var content4: [String] = []
     var ref = FIRDatabase.database().reference()
     var imageView = UIImageView()
+    var imageView2 = UIImageView()
     let defaults = UserDefaults.standard
     var logOut: UIButton?
     
@@ -30,7 +31,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Header section
         var headerImageView : UIImageView
         headerImageView  = UIImageView(frame:CGRect(x: 0, y: ((self.navigationController?.navigationBar.bounds.height)! + 20), width: self.view.bounds.width, height: 200));
-        headerImageView.backgroundColor = Colors.blueAlternative
+        headerImageView.backgroundColor = Colors.blueDim
         self.view.addSubview(headerImageView)
         
         
@@ -49,11 +50,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidAppear(_ animated: Bool) {
         
-        // Avatar
+        // Avatar background
         imageView  = UIImageView(frame:CGRect(x: self.view.bounds.width/2 - 50, y: ((self.navigationController?.navigationBar.bounds.height)! + 70), width: 100, height: 100));
-        imageView.backgroundColor = Colors.white
+        imageView.backgroundColor = Colors.blueDark
         imageView.layer.cornerRadius = 50
-        //imageView.image = UIImage(named:"title.png")
+        imageView.layer.borderColor = Colors.white.cgColor
+        imageView.layer.borderWidth = 4
         self.view.addSubview(imageView)
         
         // Translate animation using MengTo's Spring library
@@ -63,15 +65,31 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.imageView.transform = CGAffineTransform(translationX: 0, y: 0)
         })
         
+        // Avatar
+        imageView2  = UIImageView(frame:CGRect(x: 27.5, y: 25, width: 45, height: 50));
+        imageView2.backgroundColor = UIColor.clear
+        var shareImage = UIImage(named: "profile.png") as UIImage?
+        shareImage = shareImage?.imageWithColor(color1: Colors.blueDim).withRenderingMode(.alwaysOriginal)
+        imageView2.image = shareImage
+        self.imageView.addSubview(imageView2)
+        
+        // Translate animation using MengTo's Spring library
+        imageView2.transform = CGAffineTransform(translationX: 0, y: -100)
+        springWithDelay(duration: 0.8, delay: 0, animations: {
+            self.imageView2.alpha = 1
+            self.imageView2.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        
         
         
         
         
         // Log out button
         self.logOut = UIButton(type: UIButtonType.custom)
-        self.logOut!.frame = CGRect(x: (self.view.bounds.width/4)*3 - 20, y: ((self.navigationController?.navigationBar.bounds.height)! + 100), width: 90, height: 50)
+        self.logOut!.frame = CGRect(x: (self.view.bounds.width/4)*3 - 20, y: ((self.navigationController?.navigationBar.bounds.height)! + 102.5), width: 90, height: 45)
         self.logOut!.alpha = 0
-        self.logOut!.layer.cornerRadius = 25
+        self.logOut!.layer.cornerRadius = 22.5
         self.logOut!.backgroundColor = Colors.blueDark
         self.logOut!.setTitle("Log Out", for: .normal)
         self.logOut!.addTarget(self, action: #selector(logOut(button:)), for: .touchUpInside)

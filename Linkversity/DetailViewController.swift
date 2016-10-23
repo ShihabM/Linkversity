@@ -22,7 +22,11 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var reply: UIButton?
     var flag: UIButton?
     var share: UIButton?
+    var isUpvoted: Bool = false
+    var isDownvoted: Bool = false
+    var isReported: Bool = false
     var dateLabel = UILabel(frame: CGRect(x: 250, y: 195, width: 60, height: 20))
+    var voteLabel = UILabel(frame: CGRect(x: 250, y: 195, width: 60, height: 20))
     var postText = UITextView(frame: CGRect(x: 250, y: 195, width: 60, height: 20))
     var infoText = UILabel(frame: CGRect(x: 250, y: 195, width: 60, height: 20))
     var titleText = ""
@@ -39,11 +43,77 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var mapView: MKMapView = MKMapView()
     var tableView: UITableView = UITableView()
     var content: [String] = ["1", "2", "3", "4", "5", "6"]
+    var repArray: [String] = ["1", "2", "3", "4", "5", "6"]
+    var repArray2: [String] = ["1", "2", "3", "4", "5", "6"]
+    
+    
+    
+    
+    
+    
+    func loadDataFromFirebase() {
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        FIRDatabase.database().reference().observe(.value, with: { snapshot in
+            var tempItems = [NSDictionary]()
+            
+            for item in snapshot.children {
+                let child = item as! FIRDataSnapshot
+                let dict = child.value as! NSDictionary
+                tempItems.append(dict)
+            }
+            
+            self.repArray = []
+            self.repArray2 = []
+            var x = 0
+            for item in tempItems {
+                if (tempItems[x]["text"] as! String) == self.titleText {
+                    
+                    
+                    if let val = tempItems[x]["replies"] {
+                        var tempRep = tempItems[x]["replies"] as! NSDictionary
+                        for (key, value) in tempRep {
+                            
+                            
+                            var value2 = value as! NSDictionary
+                            for (y,z) in value2 {
+                                
+                                if y as! String == "reply" {
+                                    self.repArray.append(z as! String)
+                                }
+                                if y as! String == "replyUser" {
+                                    self.repArray2.append(z as! String)
+                                }
+                                
+                            }
+                            
+                            
+                            
+                            
+                        }
+                    }
+                    
+                    
+                }
+                x = x + 1
+            }
+            
+            self.tableView.reloadData()
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        })
+    }
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colors.blueDark
+        
+        loadDataFromFirebase()
         
         // Ask for location authorisation from user and use in foreground
         self.locationManager.requestAlwaysAuthorization()
@@ -78,7 +148,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         // Info label
         infoText = UILabel(frame: CGRect(x: 20, y: 185, width: self.view.bounds.width - 40, height: 35))
-        infoText.font = UIFont.systemFont(ofSize: 12)
+        infoText.font = UIFont.italicSystemFont(ofSize: 12)
         infoText.textAlignment = NSTextAlignment.left
         infoText.text = "Posted by " + self.nameText + ", a " + self.courseText + " student from " + self.uniText
         infoText.textColor = Colors.blueDim
@@ -146,7 +216,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.flag!.alpha = 0
         self.flag!.layer.cornerRadius = 25
         self.flag!.backgroundColor = UIColor.clear
-        self.flag!.addTarget(self, action: #selector(dismiss(button:)), for: .touchUpInside)
+        self.flag!.addTarget(self, action: #selector(flag(button:)), for: .touchUpInside)
         var flagImage = UIImage(named: "flag.png") as UIImage?
         flagImage = flagImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
         self.flag!.setImage(flagImage, for: .normal)
@@ -184,7 +254,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.down!.alpha = 0
         self.down!.layer.cornerRadius = 25
         self.down!.backgroundColor = UIColor.clear
-        self.down!.addTarget(self, action: #selector(dismiss(button:)), for: .touchUpInside)
+        self.down!.addTarget(self, action: #selector(downvote(button:)), for: .touchUpInside)
         var downImage = UIImage(named: "down.png") as UIImage?
         downImage = downImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
         self.down!.setImage(downImage, for: .normal)
@@ -203,7 +273,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.up!.alpha = 0
         self.up!.layer.cornerRadius = 25
         self.up!.backgroundColor = UIColor.clear
-        self.up!.addTarget(self, action: #selector(dismiss(button:)), for: .touchUpInside)
+        self.up!.addTarget(self, action: #selector(upvote(button:)), for: .touchUpInside)
         var upImage = UIImage(named: "up.png") as UIImage?
         upImage = upImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
         self.up!.setImage(upImage, for: .normal)
@@ -242,9 +312,30 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         })
         
         
+        
+        
+        // Vote label
+        voteLabel = UILabel(frame: CGRect(x: Int(self.view.bounds.width/2 - 50), y: 20, width: 100, height: 40))
+        voteLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        voteLabel.textAlignment = NSTextAlignment.center
+        voteLabel.text = String(self.voteText) + "\u{021C5}"
+        voteLabel.textColor = Colors.blueAlternative
+        voteLabel.backgroundColor = UIColor.clear
+        self.view.addSubview(voteLabel)
+        
+        // Translate animation using MengTo's Spring library
+        self.voteLabel.transform = CGAffineTransform(translationX: 0, y: -100)
+        springWithDelay(duration: 0.8, delay: 0.2, animations: {
+            self.voteLabel.alpha = 1
+            self.voteLabel.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        
+        
+        
         // Date label
         dateLabel = UILabel(frame: CGRect(x: 50, y: 20, width: self.view.bounds.width - 70, height: 40))
-        dateLabel.font = UIFont.systemFont(ofSize: 12)
+        dateLabel.font = UIFont.italicSystemFont(ofSize: 12)
         dateLabel.textAlignment = NSTextAlignment.right
         dateLabel.text = self.dateText
         dateLabel.textColor = Colors.blueDim
@@ -280,14 +371,22 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.content.count
+        return self.repArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "subtitleCell")
         
-        cell.textLabel?.text = self.content[indexPath.row]
-        cell.detailTextLabel?.text = "Test detail"
+        
+        print("----------------------")
+        print(repArray)
+        print("==================")
+        print(repArray2)
+        
+        
+        cell.textLabel?.text = self.repArray[indexPath.row]
+        cell.detailTextLabel?.text = self.repArray2[indexPath.row]
+        
         
         // Row background shade for rows with content
         if indexPath.row < self.content.count + 1 {
@@ -334,6 +433,161 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         activityVC.popoverPresentationController?.sourceView = button as! UIView
         self.present(activityVC, animated: true, completion: nil)
 
+    }
+    func flag(button: UIButton) {
+        
+        if self.isReported == false {
+            var reportImage = UIImage(named: "flag.png") as UIImage?
+            reportImage = reportImage?.imageWithColor(color1: UIColor.red).withRenderingMode(.alwaysOriginal)
+            self.flag!.setImage(reportImage, for: .normal)
+            
+            
+            self.isReported = true
+            
+            
+            var newReport = self.reportedText + 1
+            self.reportedText = newReport
+            
+            
+            var sanitisedString = self.titleText.replacingOccurrences(of: ".", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "#", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "$", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "[", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "]", with: "|")
+            
+            FIRDatabase.database().reference().child(sanitisedString).child("reported").setValue(String(newReport))
+        } else {
+            
+            var reportImage = UIImage(named: "flag.png") as UIImage?
+            reportImage = reportImage?.imageWithColor(color1: UIColor.white).withRenderingMode(.alwaysOriginal)
+            self.flag!.setImage(reportImage, for: .normal)
+            
+            
+            self.isReported = false
+            
+            
+            var newReport = self.reportedText - 1
+            self.reportedText = newReport
+            
+            
+            var sanitisedString = self.titleText.replacingOccurrences(of: ".", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "#", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "$", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "[", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "]", with: "|")
+            
+            FIRDatabase.database().reference().child(sanitisedString).child("reported").setValue(String(newReport))
+        }
+    }
+    func downvote(button: UIButton) {
+        
+        
+        if self.isDownvoted == false {
+            var upImage = UIImage(named: "up.png") as UIImage?
+            upImage = upImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+            self.up!.setImage(upImage, for: .normal)
+            
+            var downImage = UIImage(named: "down.png") as UIImage?
+            downImage = downImage?.imageWithColor(color1: Colors.blueAlternative).withRenderingMode(.alwaysOriginal)
+            self.down!.setImage(downImage, for: .normal)
+            
+            self.isDownvoted = true
+            self.isUpvoted = false
+            
+            
+            var newVote = self.voteText - 1
+            self.voteText = newVote
+            voteLabel.text = String(newVote) + "\u{021C5}"
+            
+            
+            var sanitisedString = self.titleText.replacingOccurrences(of: ".", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "#", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "$", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "[", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "]", with: "|")
+            
+            FIRDatabase.database().reference().child(sanitisedString).child("votes").setValue(String(newVote))
+        } else {
+            
+            var downImage = UIImage(named: "down.png") as UIImage?
+            downImage = downImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+            self.down!.setImage(downImage, for: .normal)
+            
+            self.isUpvoted = false
+            self.isDownvoted = false
+            
+            
+            var newVote = self.voteText + 1
+            self.voteText = newVote
+            voteLabel.text = String(newVote) + "\u{021C5}"
+            
+            
+            var sanitisedString = self.titleText.replacingOccurrences(of: ".", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "#", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "$", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "[", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "]", with: "|")
+            
+            FIRDatabase.database().reference().child(sanitisedString).child("votes").setValue(String(newVote))
+        }
+        
+        
+        
+    }
+    func upvote(button: UIButton) {
+        
+        if self.isUpvoted == false {
+            var upImage = UIImage(named: "up.png") as UIImage?
+            upImage = upImage?.imageWithColor(color1: Colors.blueAlternative).withRenderingMode(.alwaysOriginal)
+            self.up!.setImage(upImage, for: .normal)
+            
+            var downImage = UIImage(named: "down.png") as UIImage?
+            downImage = downImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+            self.down!.setImage(downImage, for: .normal)
+            
+            self.isUpvoted = true
+            self.isDownvoted = false
+            
+            
+            var newVote = self.voteText + 1
+            self.voteText = newVote
+            voteLabel.text = String(newVote) + "\u{021C5}"
+            
+            
+            var sanitisedString = self.titleText.replacingOccurrences(of: ".", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "#", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "$", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "[", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "]", with: "|")
+            
+            FIRDatabase.database().reference().child(sanitisedString).child("votes").setValue(String(newVote))
+        } else {
+            
+            var upImage = UIImage(named: "up.png") as UIImage?
+            upImage = upImage?.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+            self.up!.setImage(upImage, for: .normal)
+            
+            
+            self.isDownvoted = false
+            self.isUpvoted = false
+            
+            
+            var newVote = self.voteText - 1
+            self.voteText = newVote
+            voteLabel.text = String(newVote) + "\u{021C5}"
+            
+            
+            var sanitisedString = self.titleText.replacingOccurrences(of: ".", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "#", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "$", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "[", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "]", with: "|")
+            
+            FIRDatabase.database().reference().child(sanitisedString).child("votes").setValue(String(newVote))
+        }
+        
+        
+        
     }
     
 }

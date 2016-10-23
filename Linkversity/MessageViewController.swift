@@ -14,7 +14,8 @@ class MessageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("2")
+        self.view.backgroundColor = Colors.cellNorm
+        
     }
     
 }
