@@ -180,6 +180,7 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
             sanitisedString = sanitisedString?.replacingOccurrences(of: "$", with: "|")
             sanitisedString = sanitisedString?.replacingOccurrences(of: "[", with: "|")
             sanitisedString = sanitisedString?.replacingOccurrences(of: "]", with: "|")
+            sanitisedString = sanitisedString?.replacingOccurrences(of: "\n", with: "|")
             
             let database = FIRDatabase.database().reference().child(byAppendingPath: sanitisedString!)
             database.setValue(content)

@@ -149,12 +149,14 @@ class ReplyViewController: UIViewController, UITextViewDelegate, CLLocationManag
             sanitisedString = sanitisedString.replacingOccurrences(of: "$", with: "|")
             sanitisedString = sanitisedString.replacingOccurrences(of: "[", with: "|")
             sanitisedString = sanitisedString.replacingOccurrences(of: "]", with: "|")
+            sanitisedString = sanitisedString.replacingOccurrences(of: "\n", with: "|")
             
             var sanitisedString2 = self.postField.text.replacingOccurrences(of: ".", with: "|")
             sanitisedString2 = sanitisedString2.replacingOccurrences(of: "#", with: "|")
             sanitisedString2 = sanitisedString2.replacingOccurrences(of: "$", with: "|")
             sanitisedString2 = sanitisedString2.replacingOccurrences(of: "[", with: "|")
             sanitisedString2 = sanitisedString2.replacingOccurrences(of: "]", with: "|")
+            sanitisedString2 = sanitisedString2.replacingOccurrences(of: "\n", with: "|")
             
             let user = self.defaults.object(forKey: "user") as? String
             let userData = self.defaults.dictionary(forKey: user!) as! [String : String]

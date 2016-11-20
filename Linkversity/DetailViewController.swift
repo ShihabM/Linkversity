@@ -319,7 +319,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         voteLabel.font = UIFont.boldSystemFont(ofSize: 18)
         voteLabel.textAlignment = NSTextAlignment.center
         voteLabel.text = String(self.voteText) + "\u{021C5}"
-        voteLabel.textColor = Colors.blueAlternative
+        voteLabel.textColor = Colors.white
         voteLabel.backgroundColor = UIColor.clear
         self.view.addSubview(voteLabel)
         

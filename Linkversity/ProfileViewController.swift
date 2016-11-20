@@ -151,6 +151,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let user = self.defaults.object(forKey: "user") as? String
                 if user == storedUser {
                     
+                    
+                    if (tempItems[x]["reported"] as! String) == "thisIsAMessage" {
+                        
+                    } else {
+                    
                     self.content2.append(tempItems[x]["text"] as! String)
                     self.content3.append(tempItems[x]["user"] as! String)
                     self.content4.append(tempItems[x]["date"] as! String)
@@ -164,6 +169,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.content10.append(tempItems[x]["lat"] as! Int)
                     self.content11.append(tempItems[x]["long"] as! Int)
                     
+                    }
                 }
                 x = x + 1
             }

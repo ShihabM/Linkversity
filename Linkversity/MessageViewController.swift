@@ -24,14 +24,16 @@ class MessageViewController: UIViewController, UITableViewDelegate, UITableViewD
     var content9: [Int] = []
     var content10: [Int] = []
     var content11: [Int] = []
+    var contentEmail: [String] = []
     var segmentTouched = 0
+    var post: UIButton?
     var ref = FIRDatabase.database().reference()
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = Colors.cellNorm
+        self.view.backgroundColor = Colors.blueDim
         
         
         // Create the table and set its datasource and delegate
@@ -39,7 +41,7 @@ class MessageViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.backgroundColor = Colors.cellNorm
+        tableView.backgroundColor = Colors.blueDim
         tableView.separatorStyle = .none
         self.view.addSubview(tableView)
         self.tableView.reloadData()
@@ -63,15 +65,64 @@ class MessageViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func didSelect(_ segmentIndex: Int) {
         if segmentIndex == 0 {
+            self.hidePostButton()
             self.segmentTouched = 0
             self.loadDataFromFirebase()
         } else if segmentIndex == 1 {
+            self.showPostButton()
             self.segmentTouched = 1
-            //self.loadDataFromFirebaseCampus()
+            self.loadDataFromFirebaseMessage()
         } else {
-            //self.loadDataFromFirebaseMy()
+            
         }
     }
+    
+    func hidePostButton() {
+        
+        // Translate animation using MengTo's Spring library
+        self.post!.transform = CGAffineTransform(translationX: 0, y: 0)
+        springWithDelay(duration: 0.9, delay: 0.05, animations: {
+            self.post!.alpha = 1
+            self.post!.transform = CGAffineTransform(translationX: 0, y: 100)
+        })
+        
+    }
+    
+    func showPostButton() {
+    
+        
+        // Post button
+        self.post = UIButton(type: UIButtonType.custom)
+        self.post!.frame = CGRect(x: self.view.bounds.width - 75, y: self.view.bounds.height - 125, width: 50, height: 50)
+        self.post!.alpha = 0
+        self.post!.layer.cornerRadius = 25
+        self.post!.backgroundColor = Colors.blueAlternative
+        self.post!.addTarget(self, action: #selector(post(button:)), for: .touchUpInside)
+        var postImage = UIImage(named: "post.png")!
+        postImage = postImage.imageWithColor(color1: Colors.white).withRenderingMode(.alwaysOriginal)
+        self.post!.setImage(postImage, for: .normal)
+        self.post!.imageEdgeInsets = UIEdgeInsetsMake(14, 14, 14, 14)
+        self.view.addSubview(post!)
+        
+        // Translate animation using MengTo's Spring library
+        self.post!.transform = CGAffineTransform(translationX: 0, y: 100)
+        springWithDelay(duration: 0.9, delay: 0.05, animations: {
+            self.post!.alpha = 1
+            self.post!.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        
+    }
+    
+    
+    func post(button: UIButton) {
+        
+        var controller = SendMessageViewController()
+        self.present(controller, animated: true, completion: nil)
+        
+    }
+    
+    
     
     func loadDataFromFirebase() {
         
@@ -99,51 +150,63 @@ class MessageViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             self.content = []
             self.content2 = []
+            self.content3 = []
+            self.content4 = []
+            self.content5 = []
+            self.content6 = []
+            self.content7 = []
+            self.content8 = []
+            self.content9 = []
+            self.content10 = []
+            self.content11 = []
+            
             var x = 0
             for item in tempItems {
                 
+                if (tempItems[x]["reported"] as! String) == "thisIsAMessage" {
+                    
+                } else {
                 
-                
-                    if let val = tempItems[x]["replies"] {
-                        var tempRep = tempItems[x]["replies"] as! NSDictionary
-                        for (key, value) in tempRep {
+                if let val = tempItems[x]["replies"] {
+                    var tempRep = tempItems[x]["replies"] as! NSDictionary
+                    for (key, value) in tempRep {
+                        
+                        
+                        var value2 = value as! NSDictionary
+                        for (y,z) in value2 {
                             
-                            
-                            var value2 = value as! NSDictionary
-                            for (y,z) in value2 {
-                                
-                                if y as! String == "replyUserEmail" {
-                                    if (z as! String) == userEmail {
-                                        
-                                        
-                                        for (y,z) in value2 {
-                                            if y as! String == "reply" {
-                                                self.content.append(z as! String)
-                                                self.content2.append(tempItems[x]["text"] as! String)
-                                                self.content3.append(tempItems[x]["user"] as! String)
-                                                self.content4.append(tempItems[x]["name"] as! String)
-                                                self.content5.append(tempItems[x]["uni"] as! String)
-                                                self.content6.append(tempItems[x]["course"] as! String)
-                                                self.content7.append(tempItems[x]["date"] as! String)
-                                                var vote = (tempItems[x]["votes"] as! String)
-                                                self.content8.append(Int(vote)!)
-                                                var report = (tempItems[x]["reported"] as! String)
-                                                self.content9.append(Int(report)!)
-                                                self.content10.append(tempItems[x]["lat"] as! Int)
-                                                self.content11.append(tempItems[x]["long"] as! Int)
-                                            }
+                            if y as! String == "replyUserEmail" {
+                                if (z as! String) == userEmail {
+                                    
+                                    
+                                    for (y,z) in value2 {
+                                        if y as! String == "reply" {
+                                            self.content.append(z as! String)
+                                            self.content2.append(tempItems[x]["text"] as! String)
+                                            self.content3.append(tempItems[x]["user"] as! String)
+                                            self.content4.append(tempItems[x]["name"] as! String)
+                                            self.content5.append(tempItems[x]["uni"] as! String)
+                                            self.content6.append(tempItems[x]["course"] as! String)
+                                            self.content7.append(tempItems[x]["date"] as! String)
+                                            var vote = (tempItems[x]["votes"] as! String)
+                                            self.content8.append(Int(vote)!)
+                                            var report = (tempItems[x]["reported"] as! String)
+                                            self.content9.append(Int(report)!)
+                                            self.content10.append(tempItems[x]["lat"] as! Int)
+                                            self.content11.append(tempItems[x]["long"] as! Int)
                                         }
-
-                                        
                                     }
+                                    
+                                    
                                 }
-                                
-                                
                             }
                             
+                            
                         }
+                        
                     }
-                
+                }
+                }
                 x = x + 1
             }
             
@@ -154,14 +217,77 @@ class MessageViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
+    func loadDataFromFirebaseMessage() {
+        
+        
+        let user = self.defaults.object(forKey: "user") as? String
+        let userData = self.defaults.dictionary(forKey: user!) as! [String : String]
+        var nameData = userData["name"]
+        var uniData = userData["uni"]
+        var courseData = userData["course"]
+        var userEmail = userData["email"]
+        
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        FIRDatabase.database().reference().observe(.value, with: { snapshot in
+            var tempItems = [NSDictionary]()
+            
+            for item in snapshot.children {
+                let child = item as! FIRDataSnapshot
+                let dict = child.value as! NSDictionary
+                tempItems.append(dict)
+            }
+            
+            self.content = []
+            self.content2 = []
+            self.content3 = []
+            self.content4 = []
+            self.content5 = []
+            self.content6 = []
+            self.content7 = []
+            self.content8 = []
+            self.content9 = []
+            self.content10 = []
+            self.content11 = []
+            var x = 0
+            
+            for item in tempItems {
+                
+                if (tempItems[x]["reported"] as! String) == "thisIsAMessage" {
+                    if (tempItems[x]["votes"] as! String) == userEmail {
+                    
+                    self.content2.append(tempItems[x]["text"] as! String)
+                    self.content3.append(tempItems[x]["user"] as! String)
+                    self.content4.append(tempItems[x]["name"] as! String)
+                    self.content5.append(tempItems[x]["uni"] as! String)
+                    self.content6.append(tempItems[x]["course"] as! String)
+                    self.content7.append(tempItems[x]["date"] as! String)
+                    self.contentEmail.append(tempItems[x]["votes"] as! String)
+                        
+                    }
+                }
+                x = x + 1
+                
+            }
+            
+            self.tableView.reloadData()
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        })
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.content.count
+        if self.segmentTouched == 0 {
+            return self.content.count
+        } else {
+            return self.content2.count
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+        if self.segmentTouched == 0 {
         if let string: String = self.content[indexPath.row]  {
             
             let someWidth: CGFloat = tableView.frame.size.width - 80
@@ -176,6 +302,22 @@ class MessageViewController: UIViewController, UITableViewDelegate, UITableViewD
             return height
             
         }
+        } else {
+            if let string: String = self.content2[indexPath.row]  {
+                
+                let someWidth: CGFloat = tableView.frame.size.width - 80
+                let stringAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16)]
+                let attrString: NSAttributedString = NSAttributedString(string: string, attributes: stringAttributes)
+                let frame: CGRect = CGRect(x: 0, y: 0, width: someWidth, height: CGFloat.greatestFiniteMagnitude)
+                let textView: UITextView = UITextView(frame: frame)
+                textView.textStorage.setAttributedString(attrString)
+                textView.sizeToFit()
+                let height: CGFloat = textView.frame.size.height + 30
+                
+                return height
+                
+            }
+        }
         
         
         return 140
@@ -187,19 +329,41 @@ class MessageViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "subtitleCell")
         
-        cell.textLabel?.text = self.content[indexPath.row]
-        cell.detailTextLabel?.text = "Replied to: " + self.content2[indexPath.row]
-        
-        // Row background shade for rows with content
-        if indexPath.row < self.content.count + 1 {
-            if indexPath.row % 2 == 0 {
-                cell.backgroundColor = Colors.white
+        if self.segmentTouched == 0 {
+            cell.textLabel?.text = self.content[indexPath.row]
+            cell.detailTextLabel?.text = "Replied to: " + self.content2[indexPath.row]
+            
+            
+            // Row background shade for rows with content
+            if indexPath.row < self.content.count + 1 {
+                if indexPath.row % 2 == 0 {
+                    cell.backgroundColor = Colors.white
+                } else {
+                    cell.backgroundColor = Colors.cellAlternative
+                }
             } else {
-                cell.backgroundColor = Colors.cellAlternative
+                cell.backgroundColor = Colors.blueDim
             }
+            
         } else {
-            cell.backgroundColor = Colors.cellNorm
+            cell.textLabel?.text = self.content2[indexPath.row]
+            cell.detailTextLabel?.text = self.content3[indexPath.row]
+            
+            
+            // Row background shade for rows with content
+            if indexPath.row < self.content2.count + 1 {
+                if indexPath.row % 2 == 0 {
+                    cell.backgroundColor = Colors.white
+                } else {
+                    cell.backgroundColor = Colors.cellAlternative
+                }
+            } else {
+                cell.backgroundColor = Colors.blueDim
+            }
         }
+        
+        
+        
         cell.textLabel?.textColor = Colors.grayDark
         cell.detailTextLabel?.textColor = UIColor.gray
         
@@ -213,11 +377,12 @@ class MessageViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.showsVerticalScrollIndicator = false
         cell.isUserInteractionEnabled = true
         
-        
-        // Cell image
-        var feedImage = UIImage(named: "profile.png") as UIImage?
-        feedImage = feedImage?.imageWithColor(color1: Colors.blueDim).withRenderingMode(.alwaysOriginal)
-        cell.imageView?.image = feedImage
+        if self.segmentTouched == 1 {
+            // Cell image
+            var feedImage = UIImage(named: "profile.png") as UIImage?
+            feedImage = feedImage?.imageWithColor(color1: Colors.blueDim).withRenderingMode(.alwaysOriginal)
+            cell.imageView?.image = feedImage
+        }
         
         return cell
         

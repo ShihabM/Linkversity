@@ -29,12 +29,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Colors.blueDim
+        
         // Create the table and set its datasource and delegate
         tableView.frame = CGRect(x: 0, y: ((self.navigationController?.navigationBar.bounds.height)! + 60), width: self.view.bounds.width - 0, height: self.view.bounds.height - (self.navigationController?.navigationBar.bounds.height)! - 110);
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.backgroundColor = Colors.cellNorm
+        tableView.backgroundColor = Colors.blueDim
         tableView.separatorStyle = .none
         self.view.addSubview(tableView)
         self.tableView.reloadData()
@@ -92,6 +94,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.content2 = []
             var x = 0
             for item in tempItems {
+                
+                if (tempItems[x]["reported"] as! String) == "thisIsAMessage" {
+                    
+                } else {
+                
                 self.content.append(tempItems[x]["text"] as! String)
                 self.content2.append(tempItems[x]["user"] as! String)
                 self.content3.append(tempItems[x]["name"] as! String)
@@ -104,7 +111,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.content8.append(Int(report)!)
                 self.content9.append(tempItems[x]["lat"] as! Int)
                 self.content10.append(tempItems[x]["long"] as! Int)
+                }
                 x = x + 1
+                
             }
             
             self.tableView.reloadData()
@@ -139,6 +148,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 if uniData == storedUni! {
                     
+                    if (tempItems[x]["reported"] as! String) == "thisIsAMessage" {
+                        
+                    } else {
+                        
                     self.content.append(tempItems[x]["text"] as! String)
                     self.content2.append(tempItems[x]["user"] as! String)
                     self.content3.append(tempItems[x]["name"] as! String)
@@ -151,7 +164,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.content8.append(Int(report)!)
                     self.content9.append(tempItems[x]["lat"] as! Int)
                     self.content10.append(tempItems[x]["long"] as! Int)
-                    
+                    }
                 }
                 x = x + 1
             }
@@ -176,6 +189,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 tempItems.append(dict)
             }
             
+            
             self.content = []
             self.content2 = []
             var x = 0
@@ -185,6 +199,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let user = self.defaults.object(forKey: "user") as? String
                 if user == storedUser {
                     
+                    if (tempItems[x]["reported"] as! String) == "thisIsAMessage" {
+                        
+                    } else {
+                        
                     self.content.append(tempItems[x]["text"] as! String)
                     self.content2.append(tempItems[x]["user"] as! String)
                     self.content3.append(tempItems[x]["name"] as! String)
@@ -197,7 +215,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.content8.append(Int(report)!)
                     self.content9.append(tempItems[x]["lat"] as! Int)
                     self.content10.append(tempItems[x]["long"] as! Int)
-                    
+                    }
                 }
                 x = x + 1
             }
@@ -252,7 +270,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.backgroundColor = Colors.cellAlternative
             }
         } else {
-            cell.backgroundColor = Colors.cellNorm
+            cell.backgroundColor = Colors.blueDim
         }
         cell.textLabel?.textColor = Colors.grayDark
         cell.detailTextLabel?.textColor = UIColor.gray
