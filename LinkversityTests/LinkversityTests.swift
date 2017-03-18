@@ -11,9 +11,12 @@ import XCTest
 
 class LinkversityTests: XCTestCase {
     
+    var vc = FeedViewController()
+    var rvc = RegisterViewController()
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
     
     override func tearDown() {
@@ -21,15 +24,24 @@ class LinkversityTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testPercentageCalculator() {
+        XCTAssert(true)
+//        XCTAssert((vc.view != nil), "View did not load for ViewController")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
+    
+    func testLoadPerformance() {
+        
         self.measure {
-            // Put the code you want to measure the time of here.
+            _ = self.vc.loadDataFromFirebase()
+        }
+    }
+    
+    func testLogInPerformance() {
+        
+        self.measure {
+            _ = self.rvc.logIn
         }
     }
     

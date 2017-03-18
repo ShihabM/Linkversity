@@ -13,11 +13,13 @@ pod 'Firebase/Auth’
 
   target 'LinkversityTests' do
     inherit! :search_paths
+	pod 'Firebase'
     # Pods for testing
   end
 
   target 'LinkversityUITests' do
     inherit! :search_paths
+	pod 'Firebase'
     # Pods for testing
   end
 
